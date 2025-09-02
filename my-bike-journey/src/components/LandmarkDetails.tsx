@@ -10,9 +10,7 @@ interface LandmarkDetailsProps {
   landmark: Landmark;
 }
 
-export const LandmarkDetails: React.FC<LandmarkDetailsProps> = ({
-  landmark,
-}) => {
+const LandmarkDetails: React.FC<LandmarkDetailsProps> = ({ landmark }) => {
   const [guestbookEntries, setGuestbookEntries] = useState<GuestbookEntry[]>(
     []
   );
@@ -187,3 +185,6 @@ export const LandmarkDetails: React.FC<LandmarkDetailsProps> = ({
     </motion.div>
   );
 };
+
+export { LandmarkDetails };
+export default LandmarkDetails;
