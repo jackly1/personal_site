@@ -1,0 +1,76 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Visitor {
+  id        String   @id @default(cuid())
+  ipAddress String   @unique
+  userAgent String?
+  country   String?
+  city      String?
+  visits    Visit[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("visitors")
+}
+
+model Visit {
+  id         String   @id @default(cuid())
+  visitorId  String
+  visitor    Visitor  @relation(fields: [visitorId], references: [id], onDelete: Cascade)
+  landmarkId String?
+  landmark   Landmark? @relation(fields: [landmarkId], references: [id])
+  duration   Int?     // in seconds
+  timestamp  DateTime @default(now())
+
+  @@map("visits")
+}
+
+model Landmark {
+  id              String   @id @default(cuid())
+  title           String
+  description     String
+  details         String
+  splineObjectName String
+  position        Json?    // 3D position data
+  isActive        Boolean  @default(true)
+  visits          Visit[]
+  guestbook       GuestbookEntry[]
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@map("landmarks")
+}
+
+model GuestbookEntry {
+  id         String   @id @default(cuid())
+  landmarkId String
+  landmark   Landmark @relation(fields: [landmarkId], references: [id], onDelete: Cascade)
+  name       String
+  message    String
+  isApproved Boolean  @default(false)
+  createdAt  DateTime @default(now())
+
+  @@map("guestbook_entries")
+}
+
+model Analytics {
+  id          String   @id @default(cuid())
+  date        DateTime @unique @db.Date
+  totalVisits Int      @default(0)
+  uniqueVisitors Int   @default(0)
+  landmarkStats Json?  // Store landmark-specific stats
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("analytics")
+}
