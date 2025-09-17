@@ -15,8 +15,7 @@ export default function About({ personalInfo }: AboutProps) {
         <div className="space-y-6 text-lg leading-relaxed">
           <p>
             From {personalInfo.hometown} and currently based in{" "}
-            {personalInfo.location}, I grew up surrounded by art. My dad works
-            in multimedia art in his free time, and my mom worked in fashion. As
+            {personalInfo.location}, I grew up surrounded by art. As
             a kid, I was always being dragged from one art gallery to the next.
             By adolescence, film became my medium of choice, I found a love for
             it that I had never found in anything before.
