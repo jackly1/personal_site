@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Items from "@/components/Items";
 import Projects from "@/components/Projects";
+import { PostHogTest } from "@/components/PostHogTest";
 import type { PersonalInfo, Project, PersonalItem } from "@/lib/types";
 
 const personalInfo: PersonalInfo = {
@@ -71,6 +72,12 @@ export default function Home() {
         <About personalInfo={personalInfo} />
         <Projects projects={projects} />
         <Items personalItems={personalItems} />
+
+        {/* PostHog Test - Remove after verification */}
+        <div className="mt-8 p-4 bg-gray-100 rounded-lg">
+          <h3 className="text-lg font-semibold mb-2">PostHog Status</h3>
+          <PostHogTest />
+        </div>
       </main>
     </div>
   );
