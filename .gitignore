@@ -2,6 +2,18 @@
 node_modules/
 env/
 
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
 # Next.js
 .next/
 out/
@@ -16,6 +28,12 @@ dist/
 .env.development.local
 .env.test.local
 .env.production.local
+.env.*.local
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
 
 # OS generated files
 .DS_Store
@@ -80,8 +98,8 @@ jspm_packages/
 .cache
 .parcel-cache
 
-# next.js build output
-.next
+# TypeScript
+*.tsbuildinfo
 
 # nuxt.js build output
 .nuxt
@@ -97,4 +115,24 @@ jspm_packages/
 
 # DynamoDB Local files
 .dynamodb/
+
+# Prisma
+prisma/migrations/
+*.db-journal
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Editor directories and files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
 
