@@ -38,7 +38,7 @@ export default function Items({ personalItems }: ItemsProps) {
                 <img
                   src={item.appicon}
                   alt={item.label}
-                  className="w-8 h-8 rounded object-cover"
+                  className="w-12 h-12 rounded object-cover"
                 />
               </a>
             </div>
