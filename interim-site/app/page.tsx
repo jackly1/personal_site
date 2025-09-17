@@ -45,7 +45,15 @@ const projects: Project[] = [
     description:
       "A site that matches film stills to an input image, a practice in Computer Vision.",
     image: "/cleo.jpg",
-    technologies: ["Python", "OpenCV", "MediaPipe", "scikit-learn"],
+    technologies: [
+      "Python",
+      "Flask",
+      "TensorFlow",
+      "ResNet50",
+      "scikit-learn",
+      "OpenCV",
+      "Google Drive API",
+    ],
     inProgress: true,
     // link: "https://github.com/example",
   },
