@@ -39,14 +39,14 @@ const projects: Project[] = [
     // link: "https://example.com",
     github: "https://github.com/jackly1/petecode",
   },
-  {
-    id: "2",
-    title: "Letterboxd",
-    description: "Log of all films (in recent years) I have seen.",
-    image: "/placeholder.svg?height=200&width=300",
-    technologies: ["React", "D3.js", "Node.js"],
-    link: "https://letterboxd.com/jack1y/",
-  },
+  // {
+  //   id: "2",
+  //   title: "Letterboxd",
+  //   description: "Log of all films (in recent years) I have seen.",
+  //   image: "/placeholder.svg?height=200&width=300",
+  //   technologies: ["React", "D3.js", "Node.js"],
+  //   link: "https://letterboxd.com/jack1y/",
+  // },
 ];
 
 export default function Home() {
