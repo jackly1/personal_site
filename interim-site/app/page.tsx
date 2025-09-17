@@ -56,9 +56,9 @@ export default function Home() {
 
       <main className="max-w-4xl mx-auto px-6">
         <Hero personalInfo={personalInfo} />
-        <Items personalItems={personalItems} />
         <About personalInfo={personalInfo} />
         <Projects projects={projects} />
+        <Items personalItems={personalItems} />
       </main>
     </div>
   );
