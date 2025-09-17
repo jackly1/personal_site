@@ -23,7 +23,7 @@ export default function Projects({ projects }: ProjectsProps) {
                   <span className="text-sm text-muted-foreground font-mono">
                     {String(index + 1).padStart(2, "0")}
                   </span>
-                  <h3 className="text-xl font-medium">{project.title}</h3>
+                  <h3 className="text-xl font-bold">{project.title}</h3>
                   {project.inProgress && (
                     <span className="px-2 py-1 text-xs font-medium bg-orange-100 text-orange-800 rounded-full">
                       In-Progress
@@ -31,22 +31,22 @@ export default function Projects({ projects }: ProjectsProps) {
                   )}
                 </div>
 
-                <p className="text-muted-foreground leading-relaxed">
-                  {project.description}
-                </p>
-
                 {project.technologies && project.technologies.length > 0 && (
                   <div className="flex flex-wrap gap-2">
                     {project.technologies.map((tech, techIndex) => (
                       <span
                         key={techIndex}
-                        className="px-2 py-1 text-xs bg-secondary text-muted-foreground rounded"
+                        className="px-2 py-1 text-xs font-semibold bg-secondary text-muted-foreground rounded"
                       >
                         {tech}
                       </span>
                     ))}
                   </div>
                 )}
+
+                <p className="text-muted-foreground leading-relaxed">
+                  {project.description}
+                </p>
 
                 <div className="flex gap-4 text-sm">
                   {project.link && (
@@ -67,7 +67,7 @@ export default function Projects({ projects }: ProjectsProps) {
                       rel="noopener noreferrer"
                       className="text-muted-foreground hover:text-foreground transition-colors"
                     >
-                      Code
+                      Github
                     </a>
                   )}
                 </div>
