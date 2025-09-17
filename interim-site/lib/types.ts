@@ -2,10 +2,11 @@ export interface Project {
   id: string;
   title: string;
   description: string;
-  image: string;
+  image?: string;
   technologies?: string[];
   link?: string;
   github?: string;
+  inProgress?: boolean;
 }
 
 export interface PersonalInfo {

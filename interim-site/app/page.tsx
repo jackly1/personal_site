@@ -8,7 +8,7 @@ import type { PersonalInfo, Project, PersonalItem } from "@/lib/types";
 const personalInfo: PersonalInfo = {
   name: "Jack Lille Yerington",
   title: "CS Senior @ University of Michigan",
-  bio: "I am a CS and Spanish double major at the Univeristy of Michigan, minoring in Global Media Studies. I am passionate about tech that genuinely helps people. Sometimes annoying film buff, biking enjoyer, and composting enthusiast.",
+  bio: "I am a CS and Spanish double major at the Univeristy of Michigan, minoring in Global Media Studies. I am passionate about tech that genuinely helps people. Sometimes annoying film buff, avid/occasional reader depending on the time of year, biking enjoyer, and composting enthusiast.",
   email: "jacklilleyerington@gmail.com",
   location: "Ann Arbor, MI",
   hometown: "New York, NY",
@@ -33,20 +33,32 @@ const projects: Project[] = [
     id: "1",
     title: "PeteCode",
     description:
-      "Interactive web tool that solves LeetCode problems with in-depth explanations by a familiar voice interface (e.g. Peter Griffin) for enhanced learning.",
-    image: "/placeholder.svg?height=200&width=300",
+      "AI-powered interactive web tool that solves LeetCode problems with in-depth audio explanations for enhanced learning.",
+    image: "/small_peter.jpg",
     technologies: ["Python", "TypeScript", "React", "Django", "BAML"],
-    // link: "https://example.com",
+    // link: "https://devpost.com/software/petecode",
     github: "https://github.com/jackly1/petecode",
   },
-  // {
-  //   id: "2",
-  //   title: "Letterboxd",
-  //   description: "Log of all films (in recent years) I have seen.",
-  //   image: "/placeholder.svg?height=200&width=300",
-  //   technologies: ["React", "D3.js", "Node.js"],
-  //   link: "https://letterboxd.com/jack1y/",
-  // },
+  {
+    id: "2",
+    title: "Match Cut",
+    description:
+      "A site that matches film stills to an input image, a practice in Computer Vision.",
+    image: "/cleo.jpg",
+    technologies: ["Python", "OpenCV", "MediaPipe", "scikit-learn"],
+    inProgress: true,
+    // link: "https://github.com/example",
+  },
+  {
+    id: "3",
+    title: "This Site v2",
+    description:
+      "A 3D re-imagining of my personal website. A man rides a bike through the forest, stopping at each interest as a landmark.",
+    image: "/bike_boy.jpg",
+    technologies: ["Spline", "Next.js", "TypeScript", "Prisma", "PostgreSQL"],
+    inProgress: true,
+    // link: "https://github.com/example",
+  },
 ];
 
 export default function Home() {

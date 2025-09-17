@@ -6,7 +6,7 @@ interface ItemsProps {
 
 export default function Items({ personalItems }: ItemsProps) {
   return (
-    <section id="items" className="py-20 px-6">
+    <section id="items" className="py-0 px-6 pb-20">
       <div className="max-w-2xl">
         <h2 className="text-2xl font-medium mb-8 text-muted-foreground">
           Items
