@@ -1,13 +1,11 @@
-import posthog from "posthog-js";
+import { PostHog } from "posthog-node";
 
-export function initPostHog() {
-  if (typeof window !== "undefined") {
-    posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
-      api_host:
-        process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://us.i.posthog.com",
-      person_profiles: "identified_only",
-      capture_pageview: false, // We'll handle this manually
-      capture_pageleave: true,
-    });
-  }
+// NOTE: This is a Node.js client, so you can use it for sending events from the server side to PostHog.
+export default function PostHogClient() {
+  const posthogClient = new PostHog(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
+    host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+    flushAt: 1,
+    flushInterval: 0,
+  });
+  return posthogClient;
 }
