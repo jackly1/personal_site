@@ -2,7 +2,7 @@
 
 Welcome to my personal website repository! This contains two distinct projects showcasing different aspects of my development work and interests.
 
-## 🚀 Projects
+## Projects
 
 ### 1. Interim Site (`/interim-site`)
 
