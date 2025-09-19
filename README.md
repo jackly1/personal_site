@@ -170,7 +170,7 @@ Both projects are configured for easy deployment on Vercel:
 - **Interim Site**: PostHog integration for user analytics
 - **My Bike Journey**: Custom analytics dashboard with visitor tracking
 
-## 🛡️ Security
+## Security
 
 - All sensitive data is stored in environment variables
 - Database credentials and API keys are never committed
