@@ -43,7 +43,7 @@ const projects: Project[] = [
     id: "2",
     title: "Match Cut",
     description:
-      "A site that matches film stills to an input image, a practice in Computer Vision.",
+      "A site that matches film stills to an input image, a practice in merging my coursework in Computer Vision and Web Systems.",
     image: "/cleo.jpg",
     technologies: [
       "Python",
@@ -55,7 +55,7 @@ const projects: Project[] = [
       "Google Drive API",
     ],
     inProgress: true,
-    // link: "https://github.com/example",
+    // link: "httpAs://github.com/example",
   },
   {
     id: "3",
