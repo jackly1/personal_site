@@ -33,7 +33,7 @@ const projects: Project[] = [
     id: "1",
     title: "PeteCode",
     description:
-      "AI-powered interactive web tool that solves LeetCode problems with in-depth audio explanations for enhanced learning.",
+      "AI-powered interactive web tool that solves LeetCode problems with in-depth audio explanations for enhanced learning, a commentary on short form media consumption.",
     image: "/small_peter.jpg",
     technologies: ["Python", "TypeScript", "React", "Django", "BAML"],
     // link: "https://devpost.com/software/petecode",
