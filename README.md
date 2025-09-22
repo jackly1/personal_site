@@ -1,8 +1,9 @@
-# Personal Site Portfolio
+# Personal Site
 
-Welcome to my personal website repository! This contains two distinct projects showcasing different aspects of my development work and interests.
+Welcome to my personal website repository, there are two distinct sites in here the second of which is being worked on.
+interim-site is the current site, my-bike-journey (rough name, I know) is the next iteration.
 
-## Projects
+## Sites
 
 ### 1. Interim Site (`/interim-site`)
 
