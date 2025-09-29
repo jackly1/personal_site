@@ -31,6 +31,15 @@ const personalItems: PersonalItem[] = [
 const projects: Project[] = [
   {
     id: "1",
+    title: "Infatrode",
+    description: "Built during MHacks 25, Infatrode serves as a link map of knowledge for Michigan students. Uses TF-IDF similarity scoring, mixed with random node placement, and a custom physics engine to connect nodes.",
+    image: "/infatrode.png",
+    technologies: ["Svelte", "JavaScript", "SVG", "Vite", "Supabase (PostgreSQL)", "Node.js"],
+    link: "https://infatrode.vercel.app/",
+    // github: "https://github.com/jackly1/petecode",
+  },
+  {
+    id: "2",
     title: "PeteCode",
     description:
       "AI-powered interactive web tool that solves LeetCode problems with in-depth audio explanations for enhanced learning, a commentary on short form media consumption.",
@@ -40,7 +49,7 @@ const projects: Project[] = [
     github: "https://github.com/jackly1/petecode",
   },
   {
-    id: "2",
+    id: "3",
     title: "Match Cut",
     description:
       "A site that matches film stills to an input image, a practice in merging my coursework in Computer Vision and Web Systems.",
@@ -58,7 +67,7 @@ const projects: Project[] = [
     // link: "httpAs://github.com/example",
   },
   {
-    id: "3",
+    id: "4",
     title: "This Site v2",
     description:
       "A 3D re-imagining of my personal website. A man rides a bike through the forest, stopping at each interest as a landmark.",
