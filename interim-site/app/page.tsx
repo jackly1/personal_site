@@ -32,7 +32,7 @@ const projects: Project[] = [
   {
     id: "1",
     title: "Infatrode",
-    description: "Built during MHacks 25, Infatrode serves as a link map of knowledge for Michigan students. Uses TF-IDF similarity scoring, mixed with random node placement, and a custom physics engine to connect nodes.",
+    description: "Built during MHacks 25, Infatrode started as a link map of knowledge for Michigan students, using TF-IDF similarity scoring, mixed with random node placement, and a custom physics engine to connect nodes. Now, it has evolved into a dynamic, community-driven platform for crafting meaningful connections. Enables users to manually establish connections, add nodes, and explore relationships through interactive visualization. The infatrode site drops the algorithm and fosters organic community growth and strengthens existing relationships through the power of intentional, human-curated networks.",
     image: "/infatrode.png",
     technologies: ["Svelte", "JavaScript", "SVG", "Vite", "Supabase (PostgreSQL)", "Node.js"],
     link: "https://infatrode.vercel.app/",

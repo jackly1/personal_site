@@ -50,25 +50,29 @@ export default function Projects({ projects }: ProjectsProps) {
 
                 <div className="flex gap-4 text-sm">
                   {project.link && (
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                      View
-                    </a>
+                    <b>
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-muted-foreground hover:text-foreground transition-colors"
+                      >
+                        View Site
+                      </a>
+                    </b>
                   )}
 
                   {project.github && (
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                      Github
-                    </a>
+                    <b>
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-muted-foreground hover:text-foreground transition-colors"
+                      >
+                        View Github
+                      </a>
+                    </b>
                   )}
                 </div>
               </div>
