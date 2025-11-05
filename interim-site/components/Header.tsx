@@ -21,23 +21,32 @@ export default function Header() {
   useEffect(() => {
     let heroSection: HTMLElement | null = null;
     let timeoutId: NodeJS.Timeout;
+    let lastScrollY = window.scrollY;
 
     const handleScroll = () => {
       if (!heroSection) {
         heroSection = document.querySelector("#home");
       }
 
+      const currentScrollY = window.scrollY;
+      const scrollDirection = currentScrollY > lastScrollY ? "down" : "up";
+
       if (heroSection) {
         const heroTop = heroSection.offsetTop;
-        const scrollY = window.scrollY;
 
-        // Hide header when we reach the Hero section (where the name is)
-        if (scrollY >= heroTop - 100) {
+        // Show header when scrolling up, regardless of position
+        if (scrollDirection === "up") {
+          setIsVisible(true);
+        }
+        // Original logic: Hide header when we reach the Hero section (where the name is)
+        else if (currentScrollY >= heroTop - 100) {
           setIsVisible(false);
         } else {
           setIsVisible(true);
         }
       }
+
+      lastScrollY = currentScrollY;
     };
 
     const handleMouseMove = (e: MouseEvent) => {
