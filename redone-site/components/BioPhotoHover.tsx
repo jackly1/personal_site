@@ -12,13 +12,13 @@ const PHOTOS = [
 
 const INTERVAL_MS = 900;
 
-/** Max width of the photo column (px cap in `min(100%, …)`). Raise to show a wider image. */
+/** Frame width cap (px). */
 const MAX_IMG_WIDTH_PX = 400;
-/** Max height: viewport share and px cap. Raise `vh` or second number for a taller image. */
-const MAX_IMG_HEIGHT = 'min(60vh,520px)';
+/** Fixed frame height — all photos scale inside this box so the center pivot stays put. */
+const FRAME_HEIGHT = 'min(60vh,520px)';
 
-/** Vertical nudge for the photo (px). Negative = up, positive = down. */
-const IMG_TRANSLATE_Y_PX = -50;
+/** Extra vertical offset from the frame center (px). Positive = down, negative = up. */
+const IMG_TRANSLATE_Y_PX = -60;
 
 export default function BioPhotoHover() {
   const [idx, setIdx] = useState(0);
@@ -48,21 +48,22 @@ export default function BioPhotoHover() {
   return (
     <div className="flex w-full justify-center">
       <div
-        className="w-full bg-neutral-50"
-        style={{ maxWidth: `min(100%, ${MAX_IMG_WIDTH_PX}px)` }}
+        className="relative bg-neutral-50"
+        style={{
+          width: `min(100%, ${MAX_IMG_WIDTH_PX}px)`,
+          height: FRAME_HEIGHT,
+        }}
         onMouseEnter={handleEnter}
         onMouseLeave={handleLeave}
       >
-        {/* Full image always visible: object-contain + max dimensions, no overflow clip or fixed box height */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           key={PHOTOS[idx]}
           src={PHOTOS[idx]}
           alt=""
-          className="h-auto w-full object-contain"
+          className="absolute left-1/2 top-1/2 max-h-full max-w-full object-contain"
           style={{
-            maxHeight: MAX_IMG_HEIGHT,
-            transform: `translateY(${IMG_TRANSLATE_Y_PX}px)`,
+            transform: `translate(-50%, calc(-50% + ${IMG_TRANSLATE_Y_PX}px))`,
           }}
         />
       </div>

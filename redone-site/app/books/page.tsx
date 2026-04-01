@@ -1,29 +1,15 @@
-import PageHeader from '@/components/PageHeader';
+import { ImageMasonry } from '@/components/ImageMasonry';
 import { bookImages } from '@/data/images';
 
 export default function BooksPage() {
   return (
-    <main className="min-h-screen">
-      <PageHeader />
+    <main className="flex min-h-0 flex-1 flex-col">
+      <div className="px-6 pb-20 pt-10 md:px-12 md:pt-12">
+        <h2 className="mb-5 text-2xl font-bold text-neutral-800 md:mb-6">
+          Books
+        </h2>
 
-      <div className="px-6 pb-20 md:px-12">
-        <h2 className="mb-10 text-2xl font-light text-neutral-800">Books</h2>
-
-        <ul className="flex flex-wrap border-l border-t border-neutral-200">
-          {bookImages.map((img) => (
-            <li
-              key={img.id}
-              className="w-1/2 border-b border-r border-neutral-200 bg-neutral-100 sm:w-1/3 md:w-1/4 lg:w-1/5"
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={img.src}
-                alt={img.alt || 'Book cover'}
-                className="block h-auto w-full object-contain align-top"
-              />
-            </li>
-          ))}
-        </ul>
+        <ImageMasonry items={bookImages} imageAlt="Book cover" />
 
         <div className="mt-12">
           <a

@@ -52,7 +52,7 @@ export default function InterestsPanels() {
           <img
             src={book.src}
             alt={book.alt || 'Book cover'}
-            className="max-h-[min(32vh,34dvh)] w-full max-w-[min(72vw,16rem)] object-contain md:max-h-[min(40vh,42dvh)] md:max-w-[min(28vw,18rem)]"
+            className="max-h-[min(38vh,40dvh)] w-full max-w-[min(80vw,19rem)] object-contain md:max-h-[min(46vh,48dvh)] md:max-w-[min(32vw,22rem)]"
           />
         ) : (
           <div className="h-24 w-32 animate-pulse bg-neutral-100" />
