@@ -9,7 +9,13 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        sans: [
+          'Helvetica Neue',
+          'Helvetica',
+          'Arial',
+          'system-ui',
+          'sans-serif',
+        ],
       },
       letterSpacing: {
         name: '0.18em',

@@ -15,6 +15,7 @@ function mulberry32(seed: number) {
 
 const ROUTES: Record<GalleryImage['type'], string> = {
   project: '/projects',
+  misc: '/misc',
   book: '/books',
   film: '/films',
   self: '/bio',
@@ -66,9 +67,12 @@ function shuffle<T>(arr: T[], rng: () => number): T[] {
 
 const BOOK_SCALE = 0.75;
 
+/** Always included in the gallery “project/misc” slots when present in the pool. */
+const REPERTORY_SRC = '/static/projects/repertory.jpg';
+
 /**
  * Books vs films: **films = 2 × books** (3 books + 6 films).
- * Large tier is **self only** (never books). Remaining: self + project.
+ * Large tier is **self only** (never books). Remaining: self + project + misc (**repertory.nyc** always when available).
  */
 function pickGalleryImages(rng: () => number): Array<{ image: GalleryImage; tier: Tier }> {
   const { s, m, l } = randomTierCounts(rng);
@@ -85,8 +89,11 @@ function pickGalleryImages(rng: () => number): Array<{ image: GalleryImage; tier
     galleryImagePool.filter((i) => i.type === 'self'),
     rng,
   );
-  const projs = shuffle(
-    galleryImagePool.filter((i) => i.type === 'project'),
+  const projs = galleryImagePool.filter((i) => i.type === 'project');
+  const miscs = galleryImagePool.filter((i) => i.type === 'misc');
+  const repertory = galleryImagePool.find((i) => i.src === REPERTORY_SRC);
+  const restExtras = shuffle(
+    [...projs.filter((i) => i.src !== REPERTORY_SRC), ...miscs],
     rng,
   );
 
@@ -94,22 +101,36 @@ function pickGalleryImages(rng: () => number): Array<{ image: GalleryImage; tier
   const numFilms = 6;
   const useFiveSelf = rng() < 0.5 && selfs.length >= 5;
   const numSelf = useFiveSelf ? 5 : 4;
-  const numProj = useFiveSelf ? 1 : 2;
+  const numExtra = useFiveSelf ? 1 : 2;
+
+  const extras: GalleryImage[] = [];
+  if (repertory) extras.push(repertory);
+  for (const img of restExtras) {
+    if (extras.length >= numExtra) break;
+    if (!extras.some((e) => e.id === img.id)) extras.push(img);
+  }
+  if (extras.length < numExtra) {
+    const fallback = shuffle([...projs, ...miscs], rng);
+    for (const img of fallback) {
+      if (extras.length >= numExtra) break;
+      if (!extras.some((e) => e.id === img.id)) extras.push(img);
+    }
+  }
 
   if (
     books.length < numBooks ||
     films.length < numFilms ||
     selfs.length < numSelf ||
-    projs.length < numProj
+    extras.length < numExtra
   ) {
-    throw new Error('Gallery: image pool too small for book/film/self/project quotas');
+    throw new Error('Gallery: image pool too small for book/film/self/project+misc quotas');
   }
 
   const selected: GalleryImage[] = [
     ...books.slice(0, numBooks),
     ...films.slice(0, numFilms),
     ...selfs.slice(0, numSelf),
-    ...projs.slice(0, numProj),
+    ...extras.slice(0, numExtra),
   ];
 
   const selectedSelfs = selected.filter((i) => i.type === 'self');
@@ -285,8 +306,11 @@ function sizeBodyForTier(
   else if (image.type === 'film'){
     baseW *= 1.5
   }
+  else if (image.type === 'project') {
+    baseW *= 2;
+  }
   else if (image.type === 'misc'){
-    baseW = 2.5
+    baseW *= 2.5;
   }
 
   let w = baseW;

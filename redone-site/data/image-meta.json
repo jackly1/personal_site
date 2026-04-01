@@ -2,6 +2,9 @@
   "/static/self/headshot_24.jpg": {
     "omitFromGallery": true
   },
+  "/static/self/headshot.jpg": {
+    "omitFromGallery": true
+  },
   "/static/books/aleph.jpg": {
     "alt": "The Aleph"
   },
@@ -55,5 +58,17 @@
   },
   "/static/film/ytumama.png": {
     "alt": "Y tu mamá también"
+  },
+  "/static/projects/repertory.jpg": {
+    "alt": "repertory nyc"
+  },
+  "/static/projects/infatrode.png": {
+    "alt": "infatrode"
+  },
+  "/static/projects/match_cut.jpg": {
+    "alt": "match cut"
+  },
+  "/static/projects/petecode.jpg": {
+    "alt": "petecode"
   }
 }

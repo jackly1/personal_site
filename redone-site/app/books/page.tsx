@@ -6,17 +6,20 @@ export default function BooksPage() {
     <main className="min-h-screen">
       <PageHeader />
 
-      <div className="px-6 md:px-12 pb-20">
-        <h2 className="text-2xl font-light mb-10 text-neutral-800">Books</h2>
+      <div className="px-6 pb-20 md:px-12">
+        <h2 className="mb-10 text-2xl font-light text-neutral-800">Books</h2>
 
-        <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+        <ul className="flex flex-wrap border-l border-t border-neutral-200">
           {bookImages.map((img) => (
-            <li key={img.id} className="overflow-hidden bg-neutral-100">
+            <li
+              key={img.id}
+              className="w-1/2 border-b border-r border-neutral-200 bg-neutral-100 sm:w-1/3 md:w-1/4 lg:w-1/5"
+            >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={img.src}
                 alt={img.alt || 'Book cover'}
-                className="h-auto w-full object-contain"
+                className="block h-auto w-full object-contain align-top"
               />
             </li>
           ))}
@@ -27,7 +30,7 @@ export default function BooksPage() {
             href="https://www.goodreads.com/user/show/158036909-jack-lille-yerington/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm text-neutral-500 underline underline-offset-4 decoration-neutral-300 hover:text-neutral-800 transition-colors"
+            className="text-sm text-neutral-500 underline decoration-neutral-300 underline-offset-4 transition-colors hover:text-neutral-800"
           >
             Goodreads
           </a>

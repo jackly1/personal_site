@@ -4,16 +4,40 @@ interface Project {
   title: string;
   description: string;
   technologies: string[];
+  imageSrc: string;
+  imageAlt: string;
   link?: string;
+  linkLabel?: string;
   github?: string;
   inProgress?: boolean;
 }
 
 const projects: Project[] = [
   {
-    title: 'Infatrode',
+    title: 'repertory.nyc',
+    imageSrc: '/static/projects/repertory.jpg',
+    imageAlt: 'repertory.nyc',
     description:
-      'Built during MHacks 25, Infatrode started as a link map of knowledge for Michigan students, using TF-IDF similarity scoring, mixed with random node placement, and a custom physics engine to connect nodes. Now, it has evolved into a community-driven platform for crafting meaningful connections.',
+      'A site built out of my love for the New York arthouse/independent film scene. repertory.nyc aggregates screenings across different independent theaters in the city, allowing for easier navigation and discovery of the beauty that is New York film.',
+    technologies: [
+      'Rust',
+      'Axum',
+      'JavaScript',
+      'HTML/CSS',
+      'SVG',
+      'PostgreSQL',
+      'Railway',
+      'Vercel',
+    ],
+    link: 'https://repertory.nyc',
+    linkLabel: 'View site',
+  },
+  {
+    title: 'Infatrode',
+    imageSrc: '/static/projects/infatrode.png',
+    imageAlt: 'Infatrode',
+    description:
+      'Built during MHacks 25, Infatrode started as a link map of knowledge for Michigan students, using TF-IDF similarity scoring, mixed with random node placement, and a custom physics engine to connect nodes. Now, it has evolved into a dynamic, community-driven platform for crafting meaningful connections. Enables users to manually establish connections, add nodes, and explore relationships through interactive visualization. The infatrode site drops the algorithm and fosters organic community growth and strengthens existing relationships through the power of intentional, human-curated networks.',
     technologies: [
       'Svelte',
       'JavaScript',
@@ -23,16 +47,22 @@ const projects: Project[] = [
       'Node.js',
     ],
     link: 'https://infatrode.vercel.app/',
+    linkLabel: 'View site',
   },
   {
     title: 'PeteCode',
+    imageSrc: '/static/projects/petecode.jpg',
+    imageAlt: 'PeteCode',
     description:
       'AI-powered interactive web tool that solves LeetCode problems with in-depth audio explanations for enhanced learning, a commentary on short form media consumption.',
     technologies: ['Python', 'TypeScript', 'React', 'Django', 'BAML'],
     github: 'https://github.com/jackly1/petecode',
+    linkLabel: 'View Github',
   },
   {
     title: 'Match Cut',
+    imageSrc: '/static/projects/match_cut.jpg',
+    imageAlt: 'Match Cut',
     description:
       'A site that matches film stills to an input image, a practice in merging my coursework in Computer Vision and Web Systems.',
     technologies: [
@@ -46,19 +76,6 @@ const projects: Project[] = [
     ],
     inProgress: true,
   },
-  {
-    title: 'This Site v2',
-    description:
-      'A 3D re-imagining of my personal website. A man rides a bike through the forest, stopping at each interest as a landmark.',
-    technologies: [
-      'Spline',
-      'Next.js',
-      'TypeScript',
-      'Prisma',
-      'PostgreSQL',
-    ],
-    inProgress: true,
-  },
 ];
 
 export default function ProjectsPage() {
@@ -66,62 +83,80 @@ export default function ProjectsPage() {
     <main className="min-h-screen">
       <PageHeader />
 
-      <div className="px-6 md:px-12 pb-20 max-w-3xl">
-        <h2 className="text-2xl font-light mb-12 text-neutral-800">Projects</h2>
+      <div className="px-6 pb-20 md:px-12">
+        <h2 className="mb-12 max-w-6xl text-2xl font-bold text-neutral-800">
+          Projects
+        </h2>
 
-        <div className="space-y-16">
+        <div className="mx-auto max-w-6xl space-y-16">
           {projects.map((project, i) => (
-            <article key={i} className="group">
-              <div className="flex items-baseline gap-4 mb-3">
-                <span className="text-xs text-neutral-400 font-mono tabular-nums">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-                <h3 className="text-lg font-medium text-neutral-900">
-                  {project.title}
-                </h3>
-                {project.inProgress && (
-                  <span className="text-[10px] uppercase tracking-wider text-neutral-400 border border-neutral-300 px-2 py-0.5 rounded-full">
-                    In progress
+            <article
+              key={project.title}
+              className="flex flex-col gap-8 md:flex-row md:items-start md:gap-10 lg:gap-14"
+            >
+              <div className="min-w-0 flex-1">
+                <div className="mb-3 flex flex-wrap items-baseline gap-4">
+                  <span className="font-mono text-xs font-bold tabular-nums text-neutral-500">
+                    {String(i + 1).padStart(2, '0')}
                   </span>
-                )}
+                  <h3 className="text-lg font-bold text-neutral-900">
+                    {project.title}
+                  </h3>
+                  {project.inProgress && (
+                    <span className="rounded-full border border-neutral-300 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-neutral-500">
+                      In-Progress
+                    </span>
+                  )}
+                </div>
+
+                <p className="mb-4 text-neutral-500 leading-relaxed md:ml-9">
+                  {project.description}
+                </p>
+
+                <div className="mb-4 flex flex-wrap gap-2 md:ml-9">
+                  {project.technologies.map((tech) => (
+                    <span
+                      key={tech}
+                      className="rounded bg-neutral-100 px-2 py-1 text-[11px] text-neutral-400"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="flex gap-5 text-sm md:ml-9">
+                  {project.link && (
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-neutral-500 underline decoration-neutral-300 underline-offset-4 transition-colors hover:text-neutral-800"
+                    >
+                      {project.linkLabel ?? 'View site'}
+                    </a>
+                  )}
+                  {project.github && (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-neutral-500 underline decoration-neutral-300 underline-offset-4 transition-colors hover:text-neutral-800"
+                    >
+                      {project.linkLabel ?? 'GitHub'}
+                    </a>
+                  )}
+                </div>
               </div>
 
-              <p className="text-neutral-500 leading-relaxed mb-4 ml-9">
-                {project.description}
-              </p>
-
-              <div className="flex flex-wrap gap-2 mb-4 ml-9">
-                {project.technologies.map((tech) => (
-                  <span
-                    key={tech}
-                    className="text-[11px] text-neutral-400 bg-neutral-100 px-2 py-1 rounded"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-
-              <div className="flex gap-5 ml-9 text-sm">
-                {project.link && (
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-neutral-500 underline underline-offset-4 decoration-neutral-300 hover:text-neutral-800 transition-colors"
-                  >
-                    View site
-                  </a>
-                )}
-                {project.github && (
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-neutral-500 underline underline-offset-4 decoration-neutral-300 hover:text-neutral-800 transition-colors"
-                  >
-                    GitHub
-                  </a>
-                )}
+              <div className="mx-auto w-full shrink-0 md:mx-0 md:w-[min(100%,420px)] lg:w-[min(100%,520px)]">
+                <div className="overflow-hidden bg-neutral-100 ring-1 ring-neutral-200/80">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={project.imageSrc}
+                    alt={project.imageAlt}
+                    className="h-auto w-full object-contain"
+                  />
+                </div>
               </div>
             </article>
           ))}

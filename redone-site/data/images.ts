@@ -1,4 +1,4 @@
-export type ImageType = 'project' | 'book' | 'film' | 'self';
+export type ImageType = 'project' | 'book' | 'film' | 'self' | 'misc';
 
 export interface GalleryImage {
   id: number;
@@ -10,7 +10,7 @@ export interface GalleryImage {
 }
 
 /**
- * Built from `public/static/{self,books,film,misc}` via `npm run sync:images`.
+ * Built from `public/static/{self,books,film,misc,projects}` via `npm run sync:images`.
  * Edit captions / `omitFromGallery` in `data/image-meta.json`, then re-run sync.
  */
 export { imagePool } from './generated/imagePool';

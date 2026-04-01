@@ -1,5 +1,5 @@
 /**
- * Scans public/static/{self,books,film,misc} for images and writes
+ * Scans public/static/{self,books,film,misc,projects} for images and writes
  * data/generated/imagePool.ts. Optional captions / flags live in data/image-meta.json
  *
  * Usage: node scripts/sync-static-images.mjs
@@ -20,7 +20,8 @@ const CATEGORY_TO_TYPE = {
   self: 'self',
   books: 'book',
   film: 'film',
-  misc: 'project',
+  misc: 'misc',
+  projects: 'project',
 };
 
 const IMAGE_EXT = /\.(jpe?g|png|gif|webp|avif)$/i;
