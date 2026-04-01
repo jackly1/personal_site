@@ -5,13 +5,24 @@ export interface GalleryImage {
   src: string;
   type: ImageType;
   alt: string;
+  /** Display title (e.g. full book title). Edit `data/gallery-notes.json`. */
+  title?: string;
+  /** Personal note (films / books pages). Edit `data/gallery-notes.json` — not `imagePool.ts`. */
+  notes?: string;
+  /**
+   * Rank for “Ranked” sort (1 = first). Omit or `null` = unranked (sorted last).
+   * Edit `data/gallery-notes.json`.
+   */
+  rank?: number | null;
   /** If true, not used on the home gallery (still in `imagePool` for listings, etc.). */
   omitFromGallery?: boolean;
 }
 
 /**
  * Built from `public/static/{self,books,film,misc,projects}` via `npm run sync:images`.
- * Edit captions / `omitFromGallery` in `data/image-meta.json`, then re-run sync.
+ * Edit captions in `data/image-meta.json`. Title, notes, and rank live in
+ * `data/gallery-notes.json` (sync reads this file and does not overwrite it).
+ * New images: run `npm run sync:init-notes` once to add empty keys, then fill them in.
  */
 export { imagePool } from './generated/imagePool';
 import { imagePool } from './generated/imagePool';

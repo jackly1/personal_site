@@ -79,7 +79,7 @@ const projects: Project[] = [
 export default function ProjectsPage() {
   return (
     <main className="flex min-h-0 flex-1 flex-col">
-      <div className="px-6 pb-20 pt-10 md:px-12 md:pt-24">
+      <div className="px-6 pb-20 pt-10 md:px-12 md:pt-18">
         <div className="mx-auto max-w-5xl">
           <h2 className="mb-4 text-2xl font-bold text-neutral-800 md:mb-5">
             Projects

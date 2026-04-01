@@ -18,7 +18,7 @@ const MAX_IMG_WIDTH_PX = 400;
 const FRAME_HEIGHT = 'min(60vh,520px)';
 
 /** Extra vertical offset from the frame center (px). Positive = down, negative = up. */
-const IMG_TRANSLATE_Y_PX = -60;
+const IMG_TRANSLATE_Y_PX = 0;
 
 export default function BioPhotoHover() {
   const [idx, setIdx] = useState(0);

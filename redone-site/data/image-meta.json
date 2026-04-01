@@ -1,74 +1,254 @@
 {
   "/static/self/headshot_24.jpg": {
+    "alt": "",
     "omitFromGallery": true
   },
   "/static/self/headshot.jpg": {
+    "alt": "",
     "omitFromGallery": true
   },
+  "/static/self/bitts_pic.JPG": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/self/dog_pic.jpeg": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/self/molly_pic_1.JPEG": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/self/tube.JPG": {
+    "alt": "",
+    "omitFromGallery": false
+  },
   "/static/books/aleph.jpg": {
-    "alt": "The Aleph"
+    "alt": "The Aleph",
+    "omitFromGallery": false
   },
   "/static/books/crying_of_lot.jpg": {
-    "alt": "The Crying of Lot 49"
+    "alt": "The Crying of Lot 49",
+    "omitFromGallery": false
   },
   "/static/books/east_of_eden.jpg": {
-    "alt": "East of Eden"
+    "alt": "East of Eden",
+    "omitFromGallery": false
   },
   "/static/books/giovanni.jpg": {
-    "alt": "Giovanni's Room"
+    "alt": "Giovanni's Room",
+    "omitFromGallery": false
   },
   "/static/books/if_on_a_winter_night.jpg": {
-    "alt": "If on a winter’s night a traveler"
+    "alt": "If on a winter’s night a traveler",
+    "omitFromGallery": false
   },
   "/static/books/left_bank.jpg": {
-    "alt": "The Left Bank"
+    "alt": "The Left Bank",
+    "omitFromGallery": false
   },
   "/static/books/letters_to_young_poet.jpg": {
-    "alt": "Letters to a Young Poet"
+    "alt": "Letters to a Young Poet",
+    "omitFromGallery": false
   },
   "/static/books/must_change_life.jpg": {
-    "alt": "You Must Change Your Life"
+    "alt": "You Must Change Your Life",
+    "omitFromGallery": false
   },
   "/static/books/notebooks_of_malte.jpg": {
-    "alt": "The Notebooks of Malte Laurids Brigge"
+    "alt": "The Notebooks of Malte Laurids Brigge",
+    "omitFromGallery": false
   },
   "/static/books/wind_up_bird.jpg": {
-    "alt": "The Wind-Up Bird Chronicle"
+    "alt": "The Wind-Up Bird Chronicle",
+    "omitFromGallery": false
+  },
+  "/static/film/after_hours.jpg": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/film/again_again_again_again.jpg": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/film/all_that_breathes.jpg": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/film/american_friend.jpg": {
+    "alt": "",
+    "omitFromGallery": false
   },
   "/static/film/arrebato.jpg": {
-    "alt": "Arrebato"
+    "alt": "Arrebato",
+    "omitFromGallery": false
+  },
+  "/static/film/baby_annette.jpg": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/film/baldwin_from_another_place.jpg": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/film/barry_lyndon.jpg": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/film/black_girl_sembene.jpg": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/film/bowie_escalators_moonage.jpg": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/film/climax.jpg": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/film/coffe_cigs.jpg": {
+    "alt": "",
+    "omitFromGallery": false
   },
   "/static/film/collectioneuse.jpg": {
-    "alt": "La Collectionneuse"
+    "alt": "La Collectionneuse",
+    "omitFromGallery": false
+  },
+  "/static/film/contempt.jpg": {
+    "alt": "",
+    "omitFromGallery": false
   },
   "/static/film/darjeeling.png": {
-    "alt": "The Darjeeling Limited"
+    "alt": "The Darjeeling Limited",
+    "omitFromGallery": false
+  },
+  "/static/film/enter_the_void.jpg": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/film/happy_together_1.jpg": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/film/happy_together_2.jpg": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/film/harakiri.jpg": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/film/holy_motors.jpg": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/film/inland_empire.jpg": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/film/jeanpierre.jpg": {
+    "alt": "",
+    "omitFromGallery": false
   },
   "/static/film/lahaine.png": {
-    "alt": "La Haine"
+    "alt": "La Haine",
+    "omitFromGallery": false
+  },
+  "/static/film/lovers_on_the_bridge.jpg": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/film/orpheus.jpg": {
+    "alt": "",
+    "omitFromGallery": false
   },
   "/static/film/oslo.png": {
-    "alt": "Oslo, August 31st"
+    "alt": "Oslo, August 31st",
+    "omitFromGallery": false
+  },
+  "/static/film/paris_texas.jpg": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/film/phantom_thread.jpg": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/film/playtime.jpg": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/film/punch_drunk.jpg": {
+    "alt": "",
+    "omitFromGallery": false
   },
   "/static/film/reprise.png": {
-    "alt": "Reprise"
+    "alt": "Reprise",
+    "omitFromGallery": false
+  },
+  "/static/film/stolen_kisses.jpg": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/film/synecdoche.jpg": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/film/taste_of_cherry.jpg": {
+    "alt": "",
+    "omitFromGallery": false
   },
   "/static/film/thelonggoodbye.jpg": {
-    "alt": "The Long Goodbye"
+    "alt": "The Long Goodbye",
+    "omitFromGallery": false
+  },
+  "/static/film/three_color_white.jpg": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/film/three_colors_red.jpg": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/film/un_homme_et_une_femme.jpg": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/film/uncle_yanco_still.jpg": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/film/videodrome.jpg": {
+    "alt": "",
+    "omitFromGallery": false
   },
   "/static/film/ytumama.png": {
-    "alt": "Y tu mamá también"
+    "alt": "Y tu mamá también",
+    "omitFromGallery": false
   },
-  "/static/projects/repertory.jpg": {
-    "alt": "repertory nyc"
+  "/static/misc/bike.JPG": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/misc/food.png": {
+    "alt": "",
+    "omitFromGallery": false
   },
   "/static/projects/infatrode.png": {
-    "alt": "infatrode"
+    "alt": "infatrode",
+    "omitFromGallery": false
   },
   "/static/projects/match_cut.jpg": {
-    "alt": "match cut"
+    "alt": "match cut",
+    "omitFromGallery": false
   },
   "/static/projects/petecode.jpg": {
-    "alt": "petecode"
+    "alt": "petecode",
+    "omitFromGallery": false
+  },
+  "/static/projects/repertory.jpg": {
+    "alt": "repertory nyc",
+    "omitFromGallery": false
   }
 }

@@ -6,6 +6,7 @@
     "dev": "npm run sync:images && next dev",
     "clean": "rm -rf .next",
     "sync:images": "node scripts/sync-static-images.mjs",
+    "sync:init-notes": "node scripts/sync-static-images.mjs --init-notes",
     "prebuild": "npm run sync:images",
     "build": "next build",
     "start": "next start",

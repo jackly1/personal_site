@@ -3,11 +3,21 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 
 const GAP_PX = 6;
+/** Reserved height below the image when `notes` is set (layout + short caption). */
+const NOTES_BLOCK_PX = 52;
 
 export type MasonryItem = {
   id: number;
   src: string;
   alt?: string;
+  /** Full display title (e.g. book). Shown in hover panel when `hoverDetails` is set. */
+  title?: string;
+  notes?: string;
+  /**
+   * When true, title + notes show in a side popover (right of cover, or left if
+   * the tile is in the rightmost column). Otherwise notes render under the image.
+   */
+  hoverDetails?: boolean;
 };
 
 function colsForWidth(w: number): number {
@@ -24,19 +34,44 @@ function computeLayout(
   sizes: Record<number, Size>,
   containerWidth: number,
   gap: number
-): { positions: { left: number; top: number; width: number; height: number }[]; totalHeight: number } | null {
+): {
+  positions: {
+    left: number;
+    top: number;
+    width: number;
+    height: number;
+    imgHeight: number;
+    notesExtra: number;
+    /** 0-based column index; used to place hover popover left vs right. */
+    colIndex: number;
+  }[];
+  totalHeight: number;
+  columnCount: number;
+} | null {
   if (containerWidth <= 0 || items.length === 0) return null;
   if (!items.every((it) => sizes[it.id]?.w && sizes[it.id]?.h)) return null;
 
   const cols = colsForWidth(containerWidth);
   const columnWidth = (containerWidth - gap * (cols - 1)) / cols;
   const columnHeights = Array.from({ length: cols }, () => 0);
-  const positions: { left: number; top: number; width: number; height: number }[] = [];
+  const positions: {
+    left: number;
+    top: number;
+    width: number;
+    height: number;
+    imgHeight: number;
+    notesExtra: number;
+    colIndex: number;
+  }[] = [];
 
   for (let i = 0; i < items.length; i++) {
     const item = items[i];
     const s = sizes[item.id]!;
-    const height = (s.h / s.w) * columnWidth;
+    const imgHeight = (s.h / s.w) * columnWidth;
+    const inlineCaption =
+      item.notes && !item.hoverDetails ? NOTES_BLOCK_PX : 0;
+    const notesExtra = inlineCaption;
+    const height = imgHeight + notesExtra;
 
     let bestCol = 0;
     let bestH = columnHeights[0];
@@ -51,14 +86,42 @@ function computeLayout(
     const top = columnHeights[bestCol];
     columnHeights[bestCol] += height + gap;
 
-    positions[i] = { left, top, width: columnWidth, height };
+    positions[i] = { left, top, width: columnWidth, height, imgHeight, notesExtra, colIndex: bestCol };
   }
 
   const totalHeight = Math.max(...columnHeights, 0) - gap;
-  return { positions, totalHeight: Math.max(0, totalHeight) };
+  return {
+    positions,
+    totalHeight: Math.max(0, totalHeight),
+    columnCount: cols,
+  };
 }
 
-export function ImageMasonry({ items, imageAlt }: { items: MasonryItem[]; imageAlt: string }) {
+function hasHoverPanel(item: MasonryItem): boolean {
+  return Boolean(
+    item.hoverDetails &&
+      (item.title?.trim() || item.notes?.trim())
+  );
+}
+
+function tilePopoverClasses(popoverOnLeft: boolean) {
+  return `pointer-events-none absolute top-0 z-30 w-[min(17rem,calc(100vw-2rem))] max-h-[min(72vh,22rem)] overflow-y-auto rounded-md border border-neutral-200 bg-white px-3 py-2.5 text-left shadow-lg shadow-neutral-900/10 [overflow-wrap:anywhere] opacity-0 transition-[opacity,transform] duration-200 group-hover/item:pointer-events-auto group-hover/item:opacity-100 group-focus-within/item:pointer-events-auto group-focus-within/item:opacity-100 ${
+    popoverOnLeft
+      ? 'right-full mr-2 translate-x-2 group-hover/item:translate-x-0 group-focus-within/item:translate-x-0'
+      : 'left-full ml-2 -translate-x-2 group-hover/item:translate-x-0 group-focus-within/item:translate-x-0'
+  }`;
+}
+
+export function ImageMasonry({
+  items,
+  imageAlt,
+  layoutMode = 'masonry',
+}: {
+  items: MasonryItem[];
+  imageAlt: string;
+  /** Masonry packs into columns (order not preserved). Ordered grid keeps sort order (use for A–Z / Ranked). */
+  layoutMode?: 'masonry' | 'ordered';
+}) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerWidth, setContainerWidth] = useState(0);
   const [sizes, setSizes] = useState<Record<number, Size>>({});
@@ -107,16 +170,86 @@ export function ImageMasonry({ items, imageAlt }: { items: MasonryItem[]; imageA
     [items, sizes, containerWidth]
   );
 
-  const ready =
+  const masonryReady =
     layout !== null && layout.positions.length === items.length && items.length > 0;
+
+  const orderedCols = containerWidth > 0 ? colsForWidth(containerWidth) : 2;
+  const orderedReady = layoutMode === 'ordered' && items.length > 0 && containerWidth > 0;
 
   if (items.length === 0) {
     return <div className="w-full min-w-0" />;
   }
 
+  if (layoutMode === 'ordered') {
+    return (
+      <div ref={containerRef} className="w-full min-w-0">
+        {!orderedReady ? (
+          <div className="min-h-[120px] w-full" aria-busy="true" aria-label="Loading gallery" />
+        ) : (
+          <ul
+            className="m-0 grid list-none p-0"
+            style={{
+              gap: GAP_PX,
+              gridTemplateColumns: `repeat(${orderedCols}, minmax(0, 1fr))`,
+            }}
+          >
+            {items.map((item, i) => {
+              const showHover = hasHoverPanel(item);
+              const popoverOnLeft = orderedCols > 1 && i % orderedCols >= orderedCols - 1;
+              const notesExtra =
+                item.notes && !item.hoverDetails ? NOTES_BLOCK_PX : 0;
+              return (
+                <li
+                  key={item.id}
+                  tabIndex={showHover ? 0 : undefined}
+                  className={`group/item relative flex min-h-0 flex-col outline-none ring-offset-2 focus-visible:z-30 focus-visible:ring-2 focus-visible:ring-neutral-400 ${
+                    showHover ? 'overflow-visible hover:z-30' : 'overflow-hidden'
+                  }`}
+                >
+                  <div className="relative w-full min-h-0 overflow-hidden">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={item.src}
+                      alt={item.alt || imageAlt}
+                      className="mx-auto block h-auto max-h-[min(42vh,300px)] w-full object-contain object-top"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  {showHover ? (
+                    <div className={tilePopoverClasses(popoverOnLeft)}>
+                      {item.title?.trim() ? (
+                        <h3 className="mb-2 border-b border-neutral-200 pb-2 text-sm font-semibold leading-snug text-neutral-900">
+                          {item.title.trim()}
+                        </h3>
+                      ) : null}
+                      {item.notes?.trim() ? (
+                        <p className="m-0 text-[13px] leading-relaxed text-neutral-700 [text-wrap:pretty]">
+                          {item.notes.trim()}
+                        </p>
+                      ) : null}
+                    </div>
+                  ) : null}
+                  {item.notes && !item.hoverDetails ? (
+                    <p
+                      className="m-0 box-border w-full shrink-0 px-0.5 pb-0.5 pt-1 text-left text-[11px] leading-snug text-neutral-600"
+                      style={{ minHeight: notesExtra }}
+                    >
+                      {item.notes}
+                    </p>
+                  ) : null}
+                </li>
+              );
+            })}
+          </ul>
+        )}
+      </div>
+    );
+  }
+
   return (
     <div ref={containerRef} className="w-full min-w-0">
-      {!ready ? (
+      {!masonryReady ? (
         <div className="min-h-[120px] w-full" aria-busy="true" aria-label="Loading gallery" />
       ) : (
         <ul
@@ -125,10 +258,16 @@ export function ImageMasonry({ items, imageAlt }: { items: MasonryItem[]; imageA
         >
           {items.map((item, i) => {
             const pos = layout!.positions[i];
+            const showHover = hasHoverPanel(item);
+            const cols = layout!.columnCount;
+            const popoverOnLeft = cols > 1 && pos.colIndex >= cols - 1;
             return (
               <li
                 key={item.id}
-                className="absolute overflow-hidden bg-neutral-100"
+                tabIndex={showHover ? 0 : undefined}
+                className={`group/item absolute flex flex-col outline-none ring-offset-2 focus-visible:z-30 focus-visible:ring-2 focus-visible:ring-neutral-400 ${
+                  showHover ? 'overflow-visible hover:z-30' : 'overflow-hidden'
+                }`}
                 style={{
                   left: pos.left,
                   top: pos.top,
@@ -136,14 +275,41 @@ export function ImageMasonry({ items, imageAlt }: { items: MasonryItem[]; imageA
                   height: pos.height,
                 }}
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={item.src}
-                  alt={item.alt || imageAlt}
-                  className="block h-full w-full object-contain object-top"
-                  loading="lazy"
-                  decoding="async"
-                />
+                <div
+                  className="relative min-h-0 w-full shrink-0 overflow-hidden"
+                  style={{ height: pos.imgHeight }}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={item.src}
+                    alt={item.alt || imageAlt}
+                    className="block h-full w-full object-contain object-top"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                {showHover ? (
+                  <div className={tilePopoverClasses(popoverOnLeft)}>
+                    {item.title?.trim() ? (
+                      <h3 className="mb-2 border-b border-neutral-200 pb-2 text-sm font-semibold leading-snug text-neutral-900">
+                        {item.title.trim()}
+                      </h3>
+                    ) : null}
+                    {item.notes?.trim() ? (
+                      <p className="m-0 text-[13px] leading-relaxed text-neutral-700 [text-wrap:pretty]">
+                        {item.notes.trim()}
+                      </p>
+                    ) : null}
+                  </div>
+                ) : null}
+                {item.notes && !item.hoverDetails ? (
+                  <p
+                    className="m-0 box-border w-full shrink-0 px-0.5 pb-0.5 pt-1 text-left text-[11px] leading-snug text-neutral-600"
+                    style={{ minHeight: pos.notesExtra }}
+                  >
+                    {item.notes}
+                  </p>
+                ) : null}
               </li>
             );
           })}
