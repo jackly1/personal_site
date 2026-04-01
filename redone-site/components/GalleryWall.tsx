@@ -313,6 +313,10 @@ function sizeBodyForTier(
     baseW *= 2.5;
   }
 
+  if (image.src === "/static/self/tube.JPG"){
+    baseW /= 2.5
+  }
+
   let w = baseW;
   let h = w / aspectWh;
 

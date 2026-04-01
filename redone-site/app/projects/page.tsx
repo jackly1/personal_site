@@ -78,88 +78,88 @@ const projects: Project[] = [
 
 export default function ProjectsPage() {
   return (
-    <main className="flex min-h-0 flex-1 flex-col">
-      <div className="px-6 pb-20 pt-10 md:px-12 md:pt-18">
-        <div className="mx-auto max-w-5xl">
-          <h2 className="mb-4 text-2xl font-bold text-neutral-800 md:mb-5">
-            Projects
-          </h2>
+      <main className="flex min-h-0 flex-1 flex-col">
+          <div className="px-6 pb-20 pt-10 md:px-12 md:pt-18">
+              <div className="mx-auto max-w-5xl">
+                  <h2 className="mb-4 text-2xl font-bold text-neutral-800 md:mb-5">
+                      Projects
+                  </h2>
 
-          <div className="space-y-16">
-            {projects.map((project, i) => (
-              <article
-                key={project.title}
-                className="flex flex-col gap-8 md:flex-row md:items-start md:gap-12 lg:gap-16"
-              >
-                <div className="min-w-0 max-w-xl flex-1 md:pt-1">
-                  <div className="mb-4 flex flex-wrap items-baseline gap-4">
-                    <span className="font-mono text-xs font-bold tabular-nums text-neutral-500">
-                      {String(i + 1).padStart(2, '0')}
-                    </span>
-                    <h3 className="text-lg font-bold text-neutral-900">
-                      {project.title}
-                    </h3>
-                    {project.inProgress && (
-                      <span className="rounded-full border border-neutral-300 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-neutral-500">
-                        In-Progress
-                      </span>
-                    )}
+                  <div className="space-y-16">
+                      {projects.map((project, i) => (
+                          <article
+                              key={project.title}
+                              className="flex flex-col gap-8 md:flex-row md:items-start md:gap-12 lg:gap-16"
+                          >
+                              <div className="min-w-0 max-w-xl flex-1 md:pt-1">
+                                  <div className="mb-4 flex flex-wrap items-baseline gap-4">
+                                      <span className="font-mono text-xs font-bold tabular-nums text-neutral-500">
+                                          {String(i + 1).padStart(2, "0")}
+                                      </span>
+                                      <h3 className="text-lg font-bold text-neutral-900">
+                                          {project.title}
+                                      </h3>
+                                      {project.inProgress && (
+                                          <span className="rounded-full border border-neutral-400 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-neutral-600">
+                                              In-Progress
+                                          </span>
+                                      )}
+                                  </div>
+
+                                  <div className="mb-4 flex flex-wrap gap-2">
+                                      {project.technologies.map((tech) => (
+                                          <span
+                                              key={tech}
+                                              className="rounded bg-neutral-200 px-2 py-1 text-[11px] font-semibold text-neutral-600"
+                                          >
+                                              {tech}
+                                          </span>
+                                      ))}
+                                  </div>
+
+                                  <p className="mb-4 text-neutral-600 leading-relaxed">
+                                      {project.description}
+                                  </p>
+
+                                  <div className="flex gap-5 text-sm">
+                                      {project.link && (
+                                          <a
+                                              href={project.link}
+                                              target="_blank"
+                                              rel="noopener noreferrer"
+                                              className="text-neutral-500 underline decoration-neutral-300 underline-offset-4 transition-colors hover:text-neutral-800"
+                                          >
+                                              {project.linkLabel ?? "View site"}
+                                          </a>
+                                      )}
+                                      {project.github && (
+                                          <a
+                                              href={project.github}
+                                              target="_blank"
+                                              rel="noopener noreferrer"
+                                              className="text-neutral-500 underline decoration-neutral-300 underline-offset-4 transition-colors hover:text-neutral-800"
+                                          >
+                                              {project.linkLabel ?? "GitHub"}
+                                          </a>
+                                      )}
+                                  </div>
+                              </div>
+
+                              <div className="mx-auto w-full shrink-0 md:mx-0 md:w-[min(100%,420px)] lg:w-[min(100%,520px)]">
+                                  <div className="overflow-hidden bg-neutral-100 ring-1 ring-neutral-200/80">
+                                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                                      <img
+                                          src={project.imageSrc}
+                                          alt={project.imageAlt}
+                                          className="h-auto w-full object-contain"
+                                      />
+                                  </div>
+                              </div>
+                          </article>
+                      ))}
                   </div>
-
-                  <p className="mb-4 text-neutral-500 leading-relaxed">
-                    {project.description}
-                  </p>
-
-                  <div className="mb-4 flex flex-wrap gap-2">
-                    {project.technologies.map((tech) => (
-                      <span
-                        key={tech}
-                        className="rounded bg-neutral-100 px-2 py-1 text-[11px] text-neutral-400"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="flex gap-5 text-sm">
-                    {project.link && (
-                      <a
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-neutral-500 underline decoration-neutral-300 underline-offset-4 transition-colors hover:text-neutral-800"
-                      >
-                        {project.linkLabel ?? 'View site'}
-                      </a>
-                    )}
-                    {project.github && (
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-neutral-500 underline decoration-neutral-300 underline-offset-4 transition-colors hover:text-neutral-800"
-                      >
-                        {project.linkLabel ?? 'GitHub'}
-                      </a>
-                    )}
-                  </div>
-                </div>
-
-                <div className="mx-auto w-full shrink-0 md:mx-0 md:w-[min(100%,420px)] lg:w-[min(100%,520px)]">
-                  <div className="overflow-hidden bg-neutral-100 ring-1 ring-neutral-200/80">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={project.imageSrc}
-                      alt={project.imageAlt}
-                      className="h-auto w-full object-contain"
-                    />
-                  </div>
-                </div>
-              </article>
-            ))}
+              </div>
           </div>
-        </div>
-      </div>
-    </main>
+      </main>
   );
 }

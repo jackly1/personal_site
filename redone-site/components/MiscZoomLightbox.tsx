@@ -5,15 +5,25 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 const MIN_SCALE = 1;
 const MAX_SCALE = 4;
 const WHEEL_STEP = 0.12;
+/** Inset from viewport bottom for the image column — avoids sub-pixel overflow scroll. */
+const LIGHTBOX_BOTTOM_INSET_PX = 12;
 
 type Props = {
   src: string;
   open: boolean;
   overlayOpen: boolean;
+  /** Viewport Y (px) where the main column starts — bottom edge of the “Misc” heading. Image centers below this, to the window bottom. */
+  contentTopPx: number;
   onClose: () => void;
 };
 
-export function MiscZoomLightbox({ src, open, overlayOpen, onClose }: Props) {
+export function MiscZoomLightbox({
+  src,
+  open,
+  overlayOpen,
+  contentTopPx,
+  onClose,
+}: Props) {
   const [scale, setScale] = useState(1);
   const [tx, setTx] = useState(0);
   const [ty, setTy] = useState(0);
@@ -31,6 +41,40 @@ export function MiscZoomLightbox({ src, open, overlayOpen, onClose }: Props) {
       setDragging(false);
     }
   }, [open, src]);
+
+  useEffect(() => {
+    if (!open) return;
+    const scrollY = window.scrollY;
+    const html = document.documentElement;
+    const body = document.body;
+
+    const prevHtmlOverflow = html.style.overflow;
+    const prevBodyOverflow = body.style.overflow;
+    const prevBodyPosition = body.style.position;
+    const prevBodyTop = body.style.top;
+    const prevBodyLeft = body.style.left;
+    const prevBodyRight = body.style.right;
+    const prevBodyWidth = body.style.width;
+
+    html.style.overflow = 'hidden';
+    body.style.overflow = 'hidden';
+    body.style.position = 'fixed';
+    body.style.top = `-${scrollY}px`;
+    body.style.left = '0';
+    body.style.right = '0';
+    body.style.width = '100%';
+
+    return () => {
+      html.style.overflow = prevHtmlOverflow;
+      body.style.overflow = prevBodyOverflow;
+      body.style.position = prevBodyPosition;
+      body.style.top = prevBodyTop;
+      body.style.left = prevBodyLeft;
+      body.style.right = prevBodyRight;
+      body.style.width = prevBodyWidth;
+      window.scrollTo(0, scrollY);
+    };
+  }, [open]);
 
   useEffect(() => {
     const el = viewportRef.current;
@@ -85,27 +129,21 @@ export function MiscZoomLightbox({ src, open, overlayOpen, onClose }: Props) {
 
   if (!open) return null;
 
+  const isZoomed = scale > MIN_SCALE + 0.02;
+
+  /** Fits the full image in view at 1×; accounts for bottom inset + padding so nothing spills past the viewport. */
+  const imageMaxHeightPx =
+    contentTopPx > 0
+      ? `min(calc(100dvh - ${contentTopPx}px - 3rem - ${LIGHTBOX_BOTTOM_INSET_PX}px), 82vh)`
+      : 'min(72dvh, 82vh)';
+
   return (
     <div
-      className="absolute inset-0 z-30 flex min-h-[min(400px,60vh)] flex-col md:min-h-[min(480px,65vh)]"
+      className="fixed inset-0 z-40"
       role="dialog"
       aria-modal="true"
-      aria-label="Enlarged image"
+      aria-label="Enlarged image — click outside the photo to close"
     >
-      <button
-        type="button"
-        onClick={(e) => {
-          e.stopPropagation();
-          onClose();
-        }}
-        className={`absolute left-3 top-0 z-20 flex h-10 w-10 items-center justify-center rounded-md border border-neutral-200 bg-white/95 text-lg leading-none text-neutral-700 shadow-md transition-opacity duration-300 hover:bg-neutral-100 hover:text-neutral-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 md:left-4 ${
-          overlayOpen ? 'opacity-100' : 'opacity-0'
-        }`}
-        aria-label="Close enlarged image"
-      >
-        ×
-      </button>
-
       <div
         className={`absolute inset-0 z-0 bg-neutral-950/82 backdrop-blur-[2px] transition-opacity duration-300 ease-out ${
           overlayOpen ? 'opacity-100' : 'opacity-0'
@@ -114,37 +152,52 @@ export function MiscZoomLightbox({ src, open, overlayOpen, onClose }: Props) {
         aria-hidden
       />
 
-      <div className="pointer-events-none relative z-10 flex min-h-0 flex-1 items-center justify-center px-4 py-14 md:px-10 md:py-16">
+      {/* Center the image in the main column from below the Misc heading; bottom inset avoids edge overflow / scroll. */}
+      <div
+        className="pointer-events-none fixed left-0 right-0 z-10 flex min-h-0 flex-col overflow-hidden"
+        style={{
+          top: contentTopPx,
+          bottom: LIGHTBOX_BOTTOM_INSET_PX,
+        }}
+      >
         <div
           ref={viewportRef}
-          className="pointer-events-auto relative max-h-[min(85vh,88dvh)] w-full max-w-[min(96vw,72rem)] overflow-hidden rounded-sm shadow-2xl"
-          onClick={(e) => e.stopPropagation()}
+          className="pointer-events-auto box-border flex h-full min-h-0 w-full items-center justify-center overflow-hidden px-6 py-4 md:px-12 md:py-6"
+          onClick={onClose}
         >
           <div
             role="presentation"
-            className={`flex h-[min(85vh,88dvh)] w-full items-center justify-center ${
-              scale > MIN_SCALE + 0.01 ? (dragging ? 'cursor-grabbing' : 'cursor-grab') : 'cursor-zoom-in'
+            className={`mx-auto flex h-full min-h-0 w-full min-w-0 max-w-5xl flex-col items-center justify-center ${
+              isZoomed ? '' : 'cursor-zoom-in'
             }`}
-            style={{ touchAction: 'none' }}
-            onPointerDown={onPointerDown}
-            onPointerMove={onPointerMove}
-            onPointerUp={endDrag}
-            onPointerCancel={endDrag}
           >
             <div
+              data-misc-photo
+              className={`flex max-h-full max-w-full min-h-0 min-w-0 items-center justify-center ${
+                isZoomed ? (dragging ? 'cursor-grabbing' : 'cursor-grab') : ''
+              }`}
               style={{
+                touchAction: 'none',
                 transform: `translate(${tx}px, ${ty}px) scale(${scale})`,
                 transformOrigin: 'center center',
-                transition: dragging ? 'none' : 'transform 0.08s ease-out',
+                // No CSS transition on transform — wheel zoom is discrete; animating transform while
+                // layout/overflow used to flip with isZoomed caused a one-frame huge-image glitch.
+                transition: 'none',
               }}
+              onPointerDown={onPointerDown}
+              onPointerMove={onPointerMove}
+              onPointerUp={endDrag}
+              onPointerCancel={endDrag}
+              onClick={(e) => e.stopPropagation()}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={src}
                 alt=""
-                className={`max-h-[min(85vh,88dvh)] w-auto max-w-none select-none object-contain transition-opacity duration-300 ease-out ${
+                className={`box-border block h-auto w-auto max-w-full select-none object-contain transition-opacity duration-300 ease-out ${
                   overlayOpen ? 'opacity-100' : 'opacity-0'
                 }`}
+                style={{ maxHeight: imageMaxHeightPx }}
                 draggable={false}
               />
             </div>

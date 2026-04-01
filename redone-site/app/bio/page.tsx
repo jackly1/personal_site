@@ -42,10 +42,10 @@ export default function BioPage() {
                           </p>
                       </div>
 
-                      <div className="mt-8 space-y-3 text-sm">
+                      <div className="mt-6 space-y-3 text-med leading-relaxed">
                           <a
                               href="mailto:jacklilleyerington@gmail.com"
-                              className="font-bold block text-neutral-500 hover:text-neutral-800"
+                              className="block font-bold text-neutral-800 transition-colors hover:text-neutral-900"
                           >
                               jacklilleyerington@gmail.com
                           </a>
@@ -53,7 +53,7 @@ export default function BioPage() {
                               href="https://linkedin.com/in/jacklilleyerington"
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="font-bold block text-neutral-500 hover:text-neutral-800 translate-y-3"
+                              className="block font-bold text-neutral-800 transition-colors hover:text-neutral-900"
                           >
                               LinkedIn
                           </a>

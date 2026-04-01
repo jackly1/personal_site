@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { MiscZoomLightbox } from '@/components/MiscZoomLightbox';
 
 const FOOD = '/static/misc/food.png';
@@ -11,6 +11,8 @@ type Expanded = 'food' | 'bike' | null;
 export default function MiscPage() {
   const [expanded, setExpanded] = useState<Expanded>(null);
   const [overlayOpen, setOverlayOpen] = useState(false);
+  const miscHeadingRef = useRef<HTMLHeadingElement>(null);
+  const [contentTopPx, setContentTopPx] = useState(0);
 
   useEffect(() => {
     if (expanded) {
@@ -34,17 +36,34 @@ export default function MiscPage() {
     return () => window.removeEventListener('keydown', onKey);
   }, [expanded, close]);
 
+  useLayoutEffect(() => {
+    if (!expanded) return;
+    const measure = () => {
+      const el = miscHeadingRef.current;
+      if (!el) return;
+      setContentTopPx(Math.round(el.getBoundingClientRect().bottom));
+    };
+    measure();
+    window.addEventListener('resize', measure);
+    return () => window.removeEventListener('resize', measure);
+  }, [expanded]);
+
   const src = expanded === 'food' ? FOOD : expanded === 'bike' ? BIKE : '';
 
   return (
     <main className="relative flex min-h-0 flex-1 flex-col overflow-hidden">
-      <div className="flex min-h-0 flex-1 flex-col px-6 pb-20 pt-10 md:px-12 md:pt-18">
+      <div className="relative flex min-h-0 flex-1 flex-col overflow-hidden px-6 pb-8 pt-10 md:px-12 md:pt-18">
         <div className="mx-auto flex w-full max-w-5xl min-h-0 flex-1 flex-col">
-          <h2 className="mb-4 shrink-0 text-2xl font-bold text-neutral-800 md:mb-5">
+          <h2
+            ref={miscHeadingRef}
+            className={`shrink-0 text-2xl font-bold text-neutral-800 ${
+              expanded ? 'mb-0' : 'mb-4 md:mb-5'
+            }`}
+          >
             Misc
           </h2>
 
-          <div className="relative min-h-0 flex-1">
+          <div className="min-h-0 flex-1">
             <div
               className={`flex min-h-0 flex-1 flex-col justify-center gap-6 pb-6 transition-opacity duration-300 md:flex-row md:items-start md:gap-8 lg:gap-10 ${
                 expanded ? 'pointer-events-none opacity-0' : 'opacity-100'
@@ -62,7 +81,7 @@ export default function MiscPage() {
                   <img
                     src={FOOD}
                     alt=""
-                    className="w-full max-h-[min(24vh,28dvh)] object-contain transition-transform duration-200 group-hover:scale-[1.02] group-active:scale-[0.99] md:max-h-[min(30vh,32dvh)]"
+                    className="w-full max-h-[min(32vh,36dvh)] object-contain transition-transform duration-200 group-hover:scale-[1.02] group-active:scale-[0.99] md:max-h-[min(40vh,44dvh)]"
                   />
                 </button>
                 <p className="mt-3 text-center text-sm leading-relaxed text-neutral-600 md:mt-4">
@@ -103,17 +122,18 @@ export default function MiscPage() {
                 </button>
               </section>
             </div>
-
-            {expanded ? (
-              <MiscZoomLightbox
-                src={src}
-                open={Boolean(expanded)}
-                overlayOpen={overlayOpen}
-                onClose={close}
-              />
-            ) : null}
           </div>
         </div>
+
+        {expanded ? (
+          <MiscZoomLightbox
+            src={src}
+            open={Boolean(expanded)}
+            overlayOpen={overlayOpen}
+            contentTopPx={contentTopPx}
+            onClose={close}
+          />
+        ) : null}
       </div>
     </main>
   );

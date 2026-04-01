@@ -181,16 +181,21 @@ export function ImageMasonry({
   }
 
   if (layoutMode === 'ordered') {
+    /** Equal column width including gaps; used with flex-wrap (not grid) so align-items:center vertically centers shorter tiles in each row. */
+    const orderedItemBasis =
+      orderedCols > 0
+        ? `calc((100% - ${GAP_PX * (orderedCols - 1)}px) / ${orderedCols})`
+        : '100%';
+
     return (
       <div ref={containerRef} className="w-full min-w-0">
         {!orderedReady ? (
           <div className="min-h-[120px] w-full" aria-busy="true" aria-label="Loading gallery" />
         ) : (
           <ul
-            className="m-0 grid list-none p-0"
+            className="m-0 flex list-none flex-wrap items-center p-0"
             style={{
               gap: GAP_PX,
-              gridTemplateColumns: `repeat(${orderedCols}, minmax(0, 1fr))`,
             }}
           >
             {items.map((item, i) => {
@@ -202,16 +207,20 @@ export function ImageMasonry({
                 <li
                   key={item.id}
                   tabIndex={showHover ? 0 : undefined}
-                  className={`group/item relative flex min-h-0 flex-col outline-none ring-offset-2 focus-visible:z-30 focus-visible:ring-2 focus-visible:ring-neutral-400 ${
+                  className={`group/item relative flex min-h-0 min-w-0 flex-col outline-none ring-offset-2 focus-visible:z-30 focus-visible:ring-2 focus-visible:ring-neutral-400 ${
                     showHover ? 'overflow-visible hover:z-30' : 'overflow-hidden'
                   }`}
+                  style={{
+                    flex: `0 0 ${orderedItemBasis}`,
+                    maxWidth: orderedItemBasis,
+                  }}
                 >
-                  <div className="relative w-full min-h-0 overflow-hidden">
+                  <div className="relative flex w-full min-h-0 items-center justify-center overflow-hidden">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={item.src}
                       alt={item.alt || imageAlt}
-                      className="mx-auto block h-auto max-h-[min(42vh,300px)] w-full object-contain object-top"
+                      className="mx-auto block h-auto max-h-[min(42vh,300px)] w-auto max-w-full object-contain object-center"
                       loading="lazy"
                       decoding="async"
                     />
