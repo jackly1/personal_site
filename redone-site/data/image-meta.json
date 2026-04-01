@@ -1,0 +1,59 @@
+{
+  "/static/self/headshot_24.jpg": {
+    "omitFromGallery": true
+  },
+  "/static/books/aleph.jpg": {
+    "alt": "The Aleph"
+  },
+  "/static/books/crying_of_lot.jpg": {
+    "alt": "The Crying of Lot 49"
+  },
+  "/static/books/east_of_eden.jpg": {
+    "alt": "East of Eden"
+  },
+  "/static/books/giovanni.jpg": {
+    "alt": "Giovanni's Room"
+  },
+  "/static/books/if_on_a_winter_night.jpg": {
+    "alt": "If on a winter’s night a traveler"
+  },
+  "/static/books/left_bank.jpg": {
+    "alt": "The Left Bank"
+  },
+  "/static/books/letters_to_young_poet.jpg": {
+    "alt": "Letters to a Young Poet"
+  },
+  "/static/books/must_change_life.jpg": {
+    "alt": "You Must Change Your Life"
+  },
+  "/static/books/notebooks_of_malte.jpg": {
+    "alt": "The Notebooks of Malte Laurids Brigge"
+  },
+  "/static/books/wind_up_bird.jpg": {
+    "alt": "The Wind-Up Bird Chronicle"
+  },
+  "/static/film/arrebato.jpg": {
+    "alt": "Arrebato"
+  },
+  "/static/film/collectioneuse.jpg": {
+    "alt": "La Collectionneuse"
+  },
+  "/static/film/darjeeling.png": {
+    "alt": "The Darjeeling Limited"
+  },
+  "/static/film/lahaine.png": {
+    "alt": "La Haine"
+  },
+  "/static/film/oslo.png": {
+    "alt": "Oslo, August 31st"
+  },
+  "/static/film/reprise.png": {
+    "alt": "Reprise"
+  },
+  "/static/film/thelonggoodbye.jpg": {
+    "alt": "The Long Goodbye"
+  },
+  "/static/film/ytumama.png": {
+    "alt": "Y tu mamá también"
+  }
+}
