@@ -65,7 +65,7 @@ function shuffle<T>(arr: T[], rng: () => number): T[] {
   return a;
 }
 
-const BOOK_SCALE = 0.75;
+// const BOOK_SCALE = 0.75;
 
 /** Always included in the gallery “project/misc” slots when present in the pool. */
 const REPERTORY_SRC = '/static/projects/repertory.jpg';
@@ -298,7 +298,7 @@ function sizeBodyForTier(
   }
 
   if (image.type === 'book') {
-    baseW *= BOOK_SCALE;
+    baseW *= 1.05;
   }
   else if (image.type === 'self'){
     baseW *= 2
@@ -464,46 +464,83 @@ function resolvePair(a: Body, b: Body) {
   }
 }
 
-/** Dragged body is immovable; push the other body out and reflect its velocity on that axis. */
+/**
+ * Dragged vs other: push other first; if walls block it and overlap remains, push drag back
+ * so boxes never sit on top of each other (hard edges).
+ */
 function resolvePairWithDrag(
-  fixed: Body,
-  movable: Body,
+  drag: Body,
+  other: Body,
   vw: number,
   vh: number,
 ) {
-  const ox = Math.min(fixed.x + fixed.w, movable.x + movable.w) - Math.max(
-    fixed.x,
-    movable.x,
-  );
-  const oy = Math.min(fixed.y + fixed.h, movable.y + movable.h) - Math.max(
-    fixed.y,
-    movable.y,
-  );
+  let ox = Math.min(drag.x + drag.w, other.x + other.w) - Math.max(drag.x, other.x);
+  let oy = Math.min(drag.y + drag.h, other.y + other.h) - Math.max(drag.y, other.y);
   if (ox <= 0 || oy <= 0) return;
 
-  const fx = fixed.x + fixed.w * 0.5;
-  const mx = movable.x + movable.w * 0.5;
-  const fy = fixed.y + fixed.h * 0.5;
-  const my = movable.y + movable.h * 0.5;
+  const dcx = drag.x + drag.w * 0.5;
+  const ocx = other.x + other.w * 0.5;
+  const dcy = drag.y + drag.h * 0.5;
+  const ocy = other.y + other.h * 0.5;
 
   if (ox < oy) {
     const depth = ox + SEP_EPS;
-    if (mx < fx) {
-      movable.x -= depth;
+    if (ocx < dcx) {
+      other.x -= depth;
     } else {
-      movable.x += depth;
+      other.x += depth;
     }
-    movable.vx = -movable.vx * COR_BODY;
+    other.vx = -other.vx * COR_BODY;
   } else {
     const depth = oy + SEP_EPS;
-    if (my < fy) {
-      movable.y -= depth;
+    if (ocy < dcy) {
+      other.y -= depth;
     } else {
-      movable.y += depth;
+      other.y += depth;
     }
-    movable.vy = -movable.vy * COR_BODY;
+    other.vy = -other.vy * COR_BODY;
   }
-  resolveWalls(movable, vw, vh);
+  resolveWalls(other, vw, vh);
+
+  ox = Math.min(drag.x + drag.w, other.x + other.w) - Math.max(drag.x, other.x);
+  oy = Math.min(drag.y + drag.h, other.y + other.h) - Math.max(drag.y, other.y);
+  if (ox <= 0 || oy <= 0) return;
+
+  if (ox < oy) {
+    const depth = ox + SEP_EPS;
+    const dcx2 = drag.x + drag.w * 0.5;
+    const ocx2 = other.x + other.w * 0.5;
+    if (dcx2 < ocx2) {
+      drag.x -= depth;
+    } else {
+      drag.x += depth;
+    }
+  } else {
+    const depth = oy + SEP_EPS;
+    const dcy2 = drag.y + drag.h * 0.5;
+    const ocy2 = other.y + other.h * 0.5;
+    if (dcy2 < ocy2) {
+      drag.y -= depth;
+    } else {
+      drag.y += depth;
+    }
+  }
+}
+
+/** Run after pointer moves the drag — keeps separation in sync (physics alone can lag one frame). */
+function resolveDragAgainstAll(
+  dragIdx: number,
+  bodies: Body[],
+  vw: number,
+  vh: number,
+) {
+  for (let it = 0; it < PAIR_ITERS; it++) {
+    for (let j = 0; j < bodies.length; j++) {
+      if (j === dragIdx) continue;
+      resolvePairWithDrag(bodies[dragIdx], bodies[j], vw, vh);
+    }
+    resolveWalls(bodies[dragIdx], vw, vh);
+  }
 }
 
 function stepPhysics(
@@ -707,10 +744,8 @@ export default function GalleryWall() {
         bb.y = Math.max(0, Math.min(r.height - bb.h, ny));
         blockNextClickRef.current = true;
         const idx = dragIdxRef.current;
-        const ref = linkRefs.current[idx];
-        if (ref) {
-          ref.style.transform = `translate(${bb.x}px, ${bb.y}px)`;
-        }
+        resolveDragAgainstAll(idx, bodiesRef.current, r.width, r.height);
+        syncDom(bodiesRef.current, linkRefs);
       };
 
       const onUp = () => {
