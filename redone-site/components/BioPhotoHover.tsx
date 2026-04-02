@@ -14,8 +14,6 @@ const INTERVAL_MS = 900;
 
 /** Frame width cap (px). */
 const MAX_IMG_WIDTH_PX = 400;
-/** Fixed frame height — all photos scale inside this box so the center pivot stays put. */
-const FRAME_HEIGHT = 'min(60vh,520px)';
 
 /** Extra vertical offset from the frame center (px). Positive = down, negative = up. */
 const IMG_TRANSLATE_Y_PX = 0;
@@ -48,10 +46,9 @@ export default function BioPhotoHover() {
   return (
     <div className="flex w-full justify-center">
       <div
-        className="relative bg-neutral-50"
+        className="relative h-[min(38vh,320px)] bg-neutral-50 md:h-[min(60vh,520px)]"
         style={{
           width: `min(100%, ${MAX_IMG_WIDTH_PX}px)`,
-          height: FRAME_HEIGHT,
         }}
         onMouseEnter={handleEnter}
         onMouseLeave={handleLeave}

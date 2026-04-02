@@ -5,12 +5,14 @@
 html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 body {
   font-family: 'Helvetica Neue', Helvetica, Arial, system-ui, sans-serif;
   background-color: #fafafa;
   color: #1a1a1a;
+  overflow-x: hidden;
 }
 
 ::selection {

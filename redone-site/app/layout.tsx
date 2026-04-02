@@ -17,7 +17,9 @@ export default function RootLayout({
     <html lang="en">
       <body className="flex min-h-screen flex-col font-sans">
         <SiteHeader />
-        <div className="flex min-h-0 flex-1 flex-col">{children}</div>
+        <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-x-hidden">
+          {children}
+        </div>
       </body>
     </html>
   );

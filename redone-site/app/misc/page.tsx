@@ -94,8 +94,8 @@ export default function MiscPage() {
                 </p>
               </section>
 
-              <section className="flex min-h-0 w-full flex-col md:ml-0 md:w-[46%] md:max-w-none">
-                <p className="mb-3 text-center text-sm leading-relaxed text-neutral-600 md:mb-4">
+              <section className="flex min-h-0 w-full flex-col-reverse gap-3 md:ml-0 md:flex-col md:gap-0 md:w-[46%] md:max-w-none">
+                <p className="mb-0 text-center text-sm leading-relaxed text-neutral-600 md:mb-4">
                   This is my bike. I bought it two years ago when I had
                   covid and needed something to do for a week in the summer. Since
                   then, it has become one of the best purchases I&apos;ve ever made.

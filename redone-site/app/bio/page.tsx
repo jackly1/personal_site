@@ -3,8 +3,8 @@ import BioPhotoHover from '@/components/BioPhotoHover';
 export default function BioPage() {
   return (
       <main className="flex min-h-0 flex-1 flex-col">
-          <div className="px-6 pb-20 pt-10 md:px-12 md:pt-18">
-              <div className="mx-auto flex max-w-5xl flex-col gap-10 md:flex-row md:items-start md:gap-12 lg:gap-16">
+          <div className="px-6 pb-8 pt-10 md:px-12 md:pb-20 md:pt-18">
+              <div className="mx-auto flex max-w-5xl flex-col gap-3 md:flex-row md:items-start md:gap-12 lg:gap-16">
                   <div className="min-w-0 flex-1">
                       <h2 className="mb-4 text-2xl font-bold text-neutral-800 md:mb-5">
                           About

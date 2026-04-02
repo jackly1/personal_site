@@ -105,11 +105,10 @@ function hasHoverPanel(item: MasonryItem): boolean {
 }
 
 function tilePopoverClasses(popoverOnLeft: boolean) {
-  return `pointer-events-none absolute top-0 z-30 w-[min(17rem,calc(100vw-2rem))] max-h-[min(72vh,22rem)] overflow-y-auto rounded-md border border-neutral-200 bg-white px-3 py-2.5 text-left shadow-lg shadow-neutral-900/10 [overflow-wrap:anywhere] opacity-0 transition-[opacity,transform] duration-200 group-hover/item:pointer-events-auto group-hover/item:opacity-100 group-focus-within/item:pointer-events-auto group-focus-within/item:opacity-100 ${
-    popoverOnLeft
-      ? 'right-full mr-2 translate-x-2 group-hover/item:translate-x-0 group-focus-within/item:translate-x-0'
-      : 'left-full ml-2 -translate-x-2 group-hover/item:translate-x-0 group-focus-within/item:translate-x-0'
-  }`;
+  const sideDesktop = popoverOnLeft
+    ? 'md:left-auto md:right-full md:mr-2 md:translate-x-2 md:group-hover/item:translate-x-0 md:group-focus-within/item:translate-x-0'
+    : 'md:left-full md:right-auto md:ml-2 md:-translate-x-2 md:group-hover/item:translate-x-0 md:group-focus-within/item:translate-x-0';
+  return `pointer-events-none absolute inset-x-0 top-full z-30 mt-2 w-full max-w-full max-h-[min(42vh,14rem)] translate-x-0 overflow-y-auto overflow-x-hidden rounded-md border border-neutral-200 bg-white px-2.5 py-2 text-left text-xs shadow-lg shadow-neutral-900/10 [overflow-wrap:anywhere] [word-break:break-word] opacity-0 transition-[opacity,transform] duration-200 group-hover/item:pointer-events-auto group-hover/item:opacity-100 group-focus-within/item:pointer-events-auto group-focus-within/item:opacity-100 md:inset-x-auto md:top-0 md:mt-0 md:w-[min(17rem,calc(100vw-2rem))] md:max-h-[min(72vh,22rem)] md:px-3 md:py-2.5 ${sideDesktop}`;
 }
 
 export function ImageMasonry({
@@ -228,12 +227,12 @@ export function ImageMasonry({
                   {showHover ? (
                     <div className={tilePopoverClasses(popoverOnLeft)}>
                       {item.title?.trim() ? (
-                        <h3 className="mb-2 border-b border-neutral-200 pb-2 text-sm font-semibold leading-snug text-neutral-900">
+                        <h3 className="mb-1.5 border-b border-neutral-200 pb-1.5 text-[11px] font-semibold leading-snug text-neutral-900 md:mb-2 md:pb-2 md:text-sm">
                           {item.title.trim()}
                         </h3>
                       ) : null}
                       {item.notes?.trim() ? (
-                        <p className="m-0 text-[13px] leading-relaxed text-neutral-700 [text-wrap:pretty]">
+                        <p className="m-0 text-[11px] leading-relaxed text-neutral-700 [text-wrap:pretty] md:text-[13px]">
                           {item.notes.trim()}
                         </p>
                       ) : null}
@@ -300,12 +299,12 @@ export function ImageMasonry({
                 {showHover ? (
                   <div className={tilePopoverClasses(popoverOnLeft)}>
                     {item.title?.trim() ? (
-                      <h3 className="mb-2 border-b border-neutral-200 pb-2 text-sm font-semibold leading-snug text-neutral-900">
+                      <h3 className="mb-1.5 border-b border-neutral-200 pb-1.5 text-[11px] font-semibold leading-snug text-neutral-900 md:mb-2 md:pb-2 md:text-sm">
                         {item.title.trim()}
                       </h3>
                     ) : null}
                     {item.notes?.trim() ? (
-                      <p className="m-0 text-[13px] leading-relaxed text-neutral-700 [text-wrap:pretty]">
+                      <p className="m-0 text-[11px] leading-relaxed text-neutral-700 [text-wrap:pretty] md:text-[13px]">
                         {item.notes.trim()}
                       </p>
                     ) : null}

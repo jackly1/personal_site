@@ -114,8 +114,8 @@ export function GalleryWithSort({
   );
 
   return (
-    <main className="flex min-h-0 flex-1 flex-col">
-      <div className="px-6 pb-20 pt-10 md:px-12 md:pt-12">
+    <main className="flex min-h-0 min-w-0 flex-1 flex-col overflow-x-hidden">
+      <div className="min-w-0 max-w-full px-6 pb-20 pt-10 md:px-12 md:pt-12">
         <div className="mb-5 flex flex-col gap-3 sm:mb-6 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between md:gap-4">
           <h2 className="text-2xl font-bold text-neutral-800">{title}</h2>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
