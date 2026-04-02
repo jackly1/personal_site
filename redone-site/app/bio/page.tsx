@@ -14,8 +14,7 @@ export default function BioPage() {
                           <p>
                               I am a CS and Spanish double major at the
                               Univeristy of Michigan, minoring in Global Media
-                              Studies. I am passionate about tech that genuinely
-                              helps people. I love film, a good book, biking,
+                              Studies. I love film, a good book, biking,
                               composting, and tech that genuinely helps people
                           </p>
 

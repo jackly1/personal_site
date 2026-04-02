@@ -6,6 +6,10 @@ export const metadata: Metadata = {
   title: 'Jack Lille Yerington',
   description:
     'CS and Spanish double major minoring in Global Media Studies at the University of Michigan.',
+  icons: {
+    icon: '/avatar.jpg',
+    apple: '/avatar.jpg',
+  },
 };
 
 export default function RootLayout({
