@@ -20,8 +20,7 @@ export default function BioPage() {
                             </p>
 
                             <p>
-                                From New York, NY (currently at school in Ann
-                                Arbor, MI), I grew up surrounded by art. As a
+                                I grew up in New York surrounded by art. As a
                                 kid, I was always being dragged from one art
                                 gallery to the next. By adolescence, film became
                                 my medium of choice, I found a love for it that
@@ -29,16 +28,16 @@ export default function BioPage() {
                             </p>
 
                             <p>
-                                During high school I found love for tech, and as
-                                I moved through college, found myself more and
-                                more conflicted in a field that sometimes felt
-                                like it was too far removed from the world I
-                                knew. Each{" "}
+                                During high school I discovered computer
+                                science. As I moved through college, however, I
+                                found myself more and more conflicted in a field
+                                that sometimes felt like it was too far removed
+                                from the world I knew. Each{" "}
                                 <b>
                                     <a href="/projects">project</a>
                                 </b>{" "}
                                 is an attempt for me to bring a little bit of my
-                                known world to my education.
+                                education to my known world.
                             </p>
                         </div>
 
