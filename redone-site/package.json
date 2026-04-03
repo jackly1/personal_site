@@ -13,7 +13,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@posthog/react": "^1.8.3",
     "next": "^14.0.0",
+    "posthog-js": "^1.364.7",
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
   },
