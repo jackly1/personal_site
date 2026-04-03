@@ -19,6 +19,14 @@
     "alt": "",
     "omitFromGallery": false
   },
+  "/static/self/moped.JPG": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/self/snow.jpg": {
+    "alt": "",
+    "omitFromGallery": false
+  },
   "/static/self/tube.JPG": {
     "alt": "",
     "omitFromGallery": false
@@ -232,6 +240,10 @@
     "omitFromGallery": false
   },
   "/static/misc/food.png": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/misc/IMG_1070.jpg": {
     "alt": "",
     "omitFromGallery": false
   },

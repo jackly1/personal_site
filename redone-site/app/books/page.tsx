@@ -7,6 +7,7 @@ export default function BooksPage() {
       title="Books"
       items={bookImages}
       detailHover
+      bottomPaddingClass="pb-10 md:pb-16"
       imageAlt="Book cover"
       headerLink={{
         href: 'https://www.goodreads.com/user/show/158036909-jack-lille-yerington/',

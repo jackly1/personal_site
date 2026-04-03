@@ -10,6 +10,16 @@ function pick<T>(arr: T[]): T | undefined {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
+const FOOD_IMG = '/static/misc/food.png';
+const MUSIC_IMG = '/static/misc/IMG_1070.jpg';
+
+/**
+ * Half of (viewport − header) minus label/padding. Header ~7.5rem desktop,
+ * taller on small screens — use extra slack on narrow viewports.
+ */
+const quadrantImg =
+  'max-h-[calc((100dvh-10rem)/2-2.25rem)] w-full object-contain min-h-0 md:max-h-[calc((100dvh-7.5rem)/2-2.25rem)]';
+
 export default function InterestsPanels() {
   const [film, setFilm] = useState<GalleryImage | null>(null);
   const [book, setBook] = useState<GalleryImage | null>(null);
@@ -19,13 +29,13 @@ export default function InterestsPanels() {
     setBook(pick(bookImages) ?? null);
   }, []);
 
+  const cell =
+    'group flex min-h-0 flex-col items-center justify-center overflow-hidden bg-[#fafafa] px-3 py-2 transition-colors hover:bg-neutral-50';
+
   return (
-    <div className="flex min-h-0 flex-1 flex-col md:flex-row">
-      <Link
-        href="/films"
-        className="group flex min-h-0 flex-[1.35] flex-col items-center justify-center px-4 py-3 transition-colors hover:bg-neutral-50 md:py-4"
-      >
-        <span className="mb-2 shrink-0 text-xl font-bold text-neutral-900 md:text-2xl">
+    <div className="grid min-h-0 flex-1 grid-cols-2 grid-rows-[minmax(0,1fr)_minmax(0,1fr)] bg-[#fafafa]">
+      <Link href="/films" className={cell}>
+        <span className="mb-1 shrink-0 text-lg font-bold text-neutral-900 md:text-xl">
           Film
         </span>
         {film ? (
@@ -33,18 +43,15 @@ export default function InterestsPanels() {
           <img
             src={film.src}
             alt={film.alt || 'Film still'}
-            className="max-h-[min(34vh,36dvh)] w-full max-w-[min(92vw,56rem)] object-contain md:max-h-[min(48vh,52dvh)]"
+            className={`${quadrantImg} max-w-[min(46vw,28rem)]`}
           />
         ) : (
-          <div className="h-32 w-full max-w-md animate-pulse bg-neutral-100" />
+          <div className="h-16 w-full max-w-md animate-pulse bg-neutral-100" />
         )}
       </Link>
 
-      <Link
-        href="/books"
-        className="group flex min-h-0 flex-1 flex-col items-center justify-center px-4 py-3 transition-colors hover:bg-neutral-50 md:py-4"
-      >
-        <span className="mb-2 shrink-0 text-xl font-bold text-neutral-900 md:text-2xl">
+      <Link href="/books" className={cell}>
+        <span className="mb-1 shrink-0 text-lg font-bold text-neutral-900 md:text-xl">
           Books
         </span>
         {book ? (
@@ -52,11 +59,35 @@ export default function InterestsPanels() {
           <img
             src={book.src}
             alt={book.alt || 'Book cover'}
-            className="max-h-[min(38vh,40dvh)] w-full max-w-[min(80vw,19rem)] object-contain md:max-h-[min(46vh,48dvh)] md:max-w-[min(32vw,22rem)]"
+            className={`${quadrantImg} max-w-[min(40vw,14rem)] md:max-w-[min(28vw,18rem)]`}
           />
         ) : (
-          <div className="h-24 w-32 animate-pulse bg-neutral-100" />
+          <div className="h-16 w-24 animate-pulse bg-neutral-100" />
         )}
+      </Link>
+
+      <Link href="/food" className={cell}>
+        <span className="mb-1 shrink-0 text-lg font-bold text-neutral-900 md:text-xl">
+          Food
+        </span>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={FOOD_IMG}
+          alt="Food"
+          className={`${quadrantImg} max-w-[min(46vw,22rem)]`}
+        />
+      </Link>
+
+      <Link href="/music" className={cell}>
+        <span className="mb-1 shrink-0 text-lg font-bold text-neutral-900 md:text-xl">
+          Music
+        </span>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={MUSIC_IMG}
+          alt="Music"
+          className={`${quadrantImg} max-w-[min(46vw,22rem)]`}
+        />
       </Link>
     </div>
   );

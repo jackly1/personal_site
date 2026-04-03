@@ -75,6 +75,8 @@ export function GalleryWithSort({
   footer,
   /** When true, title + notes appear in a side popover (books + films). */
   detailHover = false,
+  /** Tailwind padding-bottom classes for the content column (e.g. tighter on films). */
+  bottomPaddingClass = 'pb-10 md:pb-14',
 }: {
   title: string;
   items: GalleryImage[];
@@ -82,6 +84,7 @@ export function GalleryWithSort({
   headerLink?: { href: string; label: string };
   footer?: ReactNode;
   detailHover?: boolean;
+  bottomPaddingClass?: string;
 }) {
   const [sortMode, setSortMode] = useState<GallerySortMode>('random');
   const [randomVersion, setRandomVersion] = useState(0);
@@ -115,7 +118,9 @@ export function GalleryWithSort({
 
   return (
     <main className="flex min-h-0 min-w-0 flex-1 flex-col overflow-x-hidden">
-      <div className="min-w-0 max-w-full px-6 pb-20 pt-10 md:px-12 md:pt-12">
+      <div
+        className={`min-w-0 max-w-full px-6 pt-10 md:px-12 md:pt-12 ${bottomPaddingClass}`}
+      >
         <div className="mb-5 flex flex-col gap-3 sm:mb-6 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between md:gap-4">
           <h2 className="text-2xl font-bold text-neutral-800">{title}</h2>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2">

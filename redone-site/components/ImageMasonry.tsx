@@ -108,7 +108,12 @@ function tilePopoverClasses(popoverOnLeft: boolean) {
   const sideDesktop = popoverOnLeft
     ? 'md:left-auto md:right-full md:mr-2 md:translate-x-2 md:group-hover/item:translate-x-0 md:group-focus-within/item:translate-x-0'
     : 'md:left-full md:right-auto md:ml-2 md:-translate-x-2 md:group-hover/item:translate-x-0 md:group-focus-within/item:translate-x-0';
-  return `pointer-events-none absolute inset-x-0 top-full z-30 mt-2 w-full max-w-full max-h-[min(42vh,14rem)] translate-x-0 overflow-y-auto overflow-x-hidden rounded-md border border-neutral-200 bg-white px-2.5 py-2 text-left text-xs shadow-lg shadow-neutral-900/10 [overflow-wrap:anywhere] [word-break:break-word] opacity-0 transition-[opacity,transform] duration-200 group-hover/item:pointer-events-auto group-hover/item:opacity-100 group-focus-within/item:pointer-events-auto group-focus-within/item:opacity-100 md:inset-x-auto md:top-0 md:mt-0 md:w-[min(17rem,calc(100vw-2rem))] md:max-h-[min(72vh,22rem)] md:px-3 md:py-2.5 ${sideDesktop}`;
+  /**
+   * Inside image frame: mobile = full-bleed overlay (matches image width + height);
+   * md+ = side panel (parent uses overflow-hidden md:overflow-visible).
+   */
+  /** overflow-y only when open — avoids nested scroll traps that eat the first page scroll on touch */
+  return `pointer-events-none absolute inset-0 z-30 min-h-0 w-full overflow-x-hidden overflow-y-hidden rounded-sm border border-neutral-200/45 bg-white/90 px-2.5 py-2 text-left text-xs shadow-sm [overflow-wrap:anywhere] [word-break:break-word] opacity-0 transition-[opacity,transform] duration-200 group-hover/item:pointer-events-auto group-hover/item:overflow-y-auto group-hover/item:opacity-100 group-focus-within/item:pointer-events-auto group-focus-within/item:overflow-y-auto group-focus-within/item:opacity-100 md:inset-auto md:top-0 md:h-auto md:min-h-0 md:w-[min(17rem,calc(100vw-2rem))] md:max-h-[min(72vh,22rem)] md:rounded-md md:border md:border-neutral-200 md:bg-white md:px-3 md:py-2.5 md:shadow-lg md:shadow-neutral-900/10 ${sideDesktop}`;
 }
 
 export function ImageMasonry({
@@ -214,7 +219,11 @@ export function ImageMasonry({
                     maxWidth: orderedItemBasis,
                   }}
                 >
-                  <div className="relative flex w-full min-h-0 items-center justify-center overflow-hidden">
+                  <div
+                    className={`relative flex w-full min-h-0 items-center justify-center ${
+                      showHover ? 'overflow-hidden md:overflow-visible' : 'overflow-hidden'
+                    }`}
+                  >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={item.src}
@@ -223,21 +232,21 @@ export function ImageMasonry({
                       loading="lazy"
                       decoding="async"
                     />
+                    {showHover ? (
+                      <div className={tilePopoverClasses(popoverOnLeft)}>
+                        {item.title?.trim() ? (
+                          <h3 className="mb-1.5 border-b border-neutral-400/35 pb-1.5 text-[11px] font-semibold leading-snug text-neutral-900 md:mb-2 md:border-neutral-200 md:pb-2 md:text-sm">
+                            {item.title.trim()}
+                          </h3>
+                        ) : null}
+                        {item.notes?.trim() ? (
+                          <p className="m-0 text-[11px] leading-relaxed text-neutral-800 [text-wrap:pretty] md:text-[13px] md:text-neutral-700">
+                            {item.notes.trim()}
+                          </p>
+                        ) : null}
+                      </div>
+                    ) : null}
                   </div>
-                  {showHover ? (
-                    <div className={tilePopoverClasses(popoverOnLeft)}>
-                      {item.title?.trim() ? (
-                        <h3 className="mb-1.5 border-b border-neutral-200 pb-1.5 text-[11px] font-semibold leading-snug text-neutral-900 md:mb-2 md:pb-2 md:text-sm">
-                          {item.title.trim()}
-                        </h3>
-                      ) : null}
-                      {item.notes?.trim() ? (
-                        <p className="m-0 text-[11px] leading-relaxed text-neutral-700 [text-wrap:pretty] md:text-[13px]">
-                          {item.notes.trim()}
-                        </p>
-                      ) : null}
-                    </div>
-                  ) : null}
                   {item.notes && !item.hoverDetails ? (
                     <p
                       className="m-0 box-border w-full shrink-0 px-0.5 pb-0.5 pt-1 text-left text-[11px] leading-snug text-neutral-600"
@@ -284,7 +293,9 @@ export function ImageMasonry({
                 }}
               >
                 <div
-                  className="relative min-h-0 w-full shrink-0 overflow-hidden"
+                  className={`relative min-h-0 w-full shrink-0 ${
+                    showHover ? 'overflow-hidden md:overflow-visible' : 'overflow-hidden'
+                  }`}
                   style={{ height: pos.imgHeight }}
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -295,21 +306,21 @@ export function ImageMasonry({
                     loading="lazy"
                     decoding="async"
                   />
+                  {showHover ? (
+                    <div className={tilePopoverClasses(popoverOnLeft)}>
+                      {item.title?.trim() ? (
+                        <h3 className="mb-1.5 border-b border-neutral-400/35 pb-1.5 text-[11px] font-semibold leading-snug text-neutral-900 md:mb-2 md:border-neutral-200 md:pb-2 md:text-sm">
+                          {item.title.trim()}
+                        </h3>
+                      ) : null}
+                      {item.notes?.trim() ? (
+                        <p className="m-0 text-[11px] leading-relaxed text-neutral-800 [text-wrap:pretty] md:text-[13px] md:text-neutral-700">
+                          {item.notes.trim()}
+                        </p>
+                      ) : null}
+                    </div>
+                  ) : null}
                 </div>
-                {showHover ? (
-                  <div className={tilePopoverClasses(popoverOnLeft)}>
-                    {item.title?.trim() ? (
-                      <h3 className="mb-1.5 border-b border-neutral-200 pb-1.5 text-[11px] font-semibold leading-snug text-neutral-900 md:mb-2 md:pb-2 md:text-sm">
-                        {item.title.trim()}
-                      </h3>
-                    ) : null}
-                    {item.notes?.trim() ? (
-                      <p className="m-0 text-[11px] leading-relaxed text-neutral-700 [text-wrap:pretty] md:text-[13px]">
-                        {item.notes.trim()}
-                      </p>
-                    ) : null}
-                  </div>
-                ) : null}
                 {item.notes && !item.hoverDetails ? (
                   <p
                     className="m-0 box-border w-full shrink-0 px-0.5 pb-0.5 pt-1 text-left text-[11px] leading-snug text-neutral-600"

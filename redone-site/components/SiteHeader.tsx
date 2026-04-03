@@ -18,7 +18,9 @@ export default function SiteHeader() {
   const interests =
     pathname === '/interests' ||
     pathname === '/films' ||
-    pathname === '/books';
+    pathname === '/books' ||
+    pathname === '/food' ||
+    pathname === '/music';
   const misc = pathname === '/misc';
 
   return (

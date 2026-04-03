@@ -7,6 +7,7 @@ export default function FilmsPage() {
       title="Films"
       items={filmImages}
       detailHover
+      bottomPaddingClass="pb-6 md:pb-10"
       imageAlt="Film still"
       headerLink={{
         href: 'https://letterboxd.com/jack1y/',

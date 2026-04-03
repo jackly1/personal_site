@@ -72,7 +72,7 @@ const REPERTORY_SRC = '/static/projects/repertory.jpg';
 
 /**
  * Books vs films: **films = 2 × books** (3 books + 6 films).
- * Large tier is **self only** (never books). Remaining: self + project + misc (**repertory.nyc** always when available).
+ * Large tier is **self only** (never books). **3 self** images + **3** project/misc (**repertory.nyc** preferred when available).
  */
 function pickGalleryImages(rng: () => number): Array<{ image: GalleryImage; tier: Tier }> {
   const { s, m, l } = randomTierCounts(rng);
@@ -99,9 +99,9 @@ function pickGalleryImages(rng: () => number): Array<{ image: GalleryImage; tier
 
   const numBooks = 3;
   const numFilms = 6;
-  const useFiveSelf = rng() < 0.5 && selfs.length >= 5;
-  const numSelf = useFiveSelf ? 5 : 4;
-  const numExtra = useFiveSelf ? 1 : 2;
+  const numSelf = 3;
+  /** Project + misc slots so total stays 15 (3+6+3+3). */
+  const numExtra = 3;
 
   const extras: GalleryImage[] = [];
   if (repertory) extras.push(repertory);
