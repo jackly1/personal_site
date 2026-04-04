@@ -1,14 +1,18 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { imagePool } from '@/data/images';
 
-/** Always starts on Molly; cycles the other self shots on hover (no headshot). */
-const PHOTOS = [
-  '/static/self/molly_pic_1.JPEG',
-  '/static/self/bitts_pic.JPG',
-  '/static/self/dog_pic.jpeg',
-  '/static/self/tube.JPG',
-] as const;
+const MOLLY_SRC = '/static/self/molly_pic_1.JPEG';
+
+/** All `self` images from the image pool (synced from `public/static/self`), minus `omitFromGallery`. Molly first. */
+const PHOTOS: readonly string[] = (() => {
+  const selfs = imagePool
+    .filter((i) => i.type === 'self' && !i.omitFromGallery)
+    .map((i) => i.src);
+  const rest = selfs.filter((s) => s !== MOLLY_SRC).sort();
+  return selfs.includes(MOLLY_SRC) ? [MOLLY_SRC, ...rest] : [...selfs].sort();
+})();
 
 const INTERVAL_MS = 900;
 
@@ -42,6 +46,10 @@ export default function BioPhotoHover() {
   };
 
   useEffect(() => () => clearTimer(), [clearTimer]);
+
+  if (PHOTOS.length === 0) {
+    return null;
+  }
 
   return (
     <div className="flex w-full justify-center">
