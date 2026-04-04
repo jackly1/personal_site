@@ -66,5 +66,6 @@ export const imagePool: GalleryImage[] = [
   { id: 58, src: "/static/self/bitts_pic.JPG", type: 'self', alt: "", title: "", notes: "", rank: null },
   { id: 59, src: "/static/self/dog_pic.jpeg", type: 'self', alt: "", title: "", notes: "", rank: null },
   { id: 60, src: "/static/self/molly_pic_1.JPEG", type: 'self', alt: "", title: "", notes: "", rank: null },
-  { id: 61, src: "/static/self/tube.JPG", type: 'self', alt: "", title: "", notes: "", rank: null },
+  { id: 61, src: "/static/self/snow.jpg", type: 'self', alt: "", title: "", notes: "", rank: null },
+  { id: 62, src: "/static/self/tube.JPG", type: 'self', alt: "", title: "", notes: "", rank: null },
 ];
