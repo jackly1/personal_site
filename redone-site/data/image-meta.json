@@ -7,6 +7,14 @@
     "alt": "",
     "omitFromGallery": true
   },
+  "/static/misc/IMG_1070.jpg": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/self/snow.jpg": {
+    "alt": "",
+    "omitFromGallery": false
+  },
   "/static/self/bitts_pic.JPG": {
     "alt": "",
     "omitFromGallery": false
@@ -20,10 +28,6 @@
     "omitFromGallery": false
   },
   "/static/self/moped.JPG": {
-    "alt": "",
-    "omitFromGallery": false
-  },
-  "/static/self/snow.jpg": {
     "alt": "",
     "omitFromGallery": false
   },
@@ -235,15 +239,135 @@
     "alt": "Y tu mamá también",
     "omitFromGallery": false
   },
+  "/static/food/barbecue_chicken_peppers.JPG": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/food/barbecue_chicken.JPG": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/food/beautiful_veggies.JPG": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/food/birria_guac.JPG": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/food/birria.JPG": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/food/chicken_avocado_tortilla.JPG": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/food/chicken_lots_of_greens.JPG": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/food/cucumber_shishito.JPG": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/food/dirty_rice_chicken.JPG": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/food/durkey_chilliii.JPG": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/food/eggplant_salad_fries.JPG": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/food/food.png": {
+    "alt": "",
+    "omitFromGallery": true
+  },
+  "/static/food/jollof_w_chicken.JPG": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/food/jollof.JPG": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/food/looks_good_not_my_best.JPG": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/food/madrid_salad.JPG": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/food/mexican.JPG": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/food/mutlicolor_taco.JPG": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/food/oxtail.JPG": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/food/pork_steak_madrid.JPG": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/food/pozole.JPG": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/food/puerto_rican_chicken.JPG": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/food/roasted_tomato_onion_chicken.JPG": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/food/shabu_shabu.JPG": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/food/spaghetti_corn_sauce.JPG": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/food/steak_brussels_red_onion.JPG": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/food/stockholm_salmon.JPG": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/food/tomato_confit_beets_chicken.JPG": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/food/tomato_rice.JPG": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/food/tomato_soup.JPG": {
+    "alt": "",
+    "omitFromGallery": false
+  },
+  "/static/food/vibrant_taco.JPG": {
+    "alt": "",
+    "omitFromGallery": false
+  },
   "/static/misc/bike.JPG": {
     "alt": "",
     "omitFromGallery": false
   },
-  "/static/misc/food.png": {
-    "alt": "",
-    "omitFromGallery": false
-  },
-  "/static/misc/IMG_1070.jpg": {
+  "/static/misc/dog_walk.jpg": {
     "alt": "",
     "omitFromGallery": false
   },

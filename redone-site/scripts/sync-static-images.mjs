@@ -1,5 +1,5 @@
 /**
- * Scans public/static/{self,books,film,misc,projects} for images and writes
+ * Scans public/static/{self,books,film,food,misc,projects} for images and writes
  * data/generated/imagePool.ts.
  *
  * - Captions / omitFromGallery: data/image-meta.json (merged per file).
@@ -28,6 +28,7 @@ const CATEGORY_TO_TYPE = {
   self: 'self',
   books: 'book',
   film: 'film',
+  food: 'food',
   misc: 'misc',
   projects: 'project',
 };

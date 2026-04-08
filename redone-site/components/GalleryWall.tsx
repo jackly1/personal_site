@@ -18,6 +18,7 @@ const ROUTES: Record<GalleryImage['type'], string> = {
   misc: '/misc',
   book: '/books',
   film: '/films',
+  food: '/food',
   self: '/bio',
 };
 
@@ -67,12 +68,12 @@ function shuffle<T>(arr: T[], rng: () => number): T[] {
 
 // const BOOK_SCALE = 0.75;
 
-/** Always included in the gallery “project/misc” slots when present in the pool. */
+/** Always included in the gallery “project/misc/food” slots when present in the pool. */
 const REPERTORY_SRC = '/static/projects/repertory.jpg';
 
 /**
  * Books vs films: **films = 2 × books** (3 books + 6 films).
- * Large tier is **self only** (never books). **3 self** images + **3** project/misc (**repertory.nyc** preferred when available).
+ * Large tier is **self only** (never books). **3 self** images + **3** project/misc/food (**repertory.nyc** preferred when available).
  */
 function pickGalleryImages(rng: () => number): Array<{ image: GalleryImage; tier: Tier }> {
   const { s, m, l } = randomTierCounts(rng);
@@ -91,16 +92,17 @@ function pickGalleryImages(rng: () => number): Array<{ image: GalleryImage; tier
   );
   const projs = galleryImagePool.filter((i) => i.type === 'project');
   const miscs = galleryImagePool.filter((i) => i.type === 'misc');
+  const foods = galleryImagePool.filter((i) => i.type === 'food');
   const repertory = galleryImagePool.find((i) => i.src === REPERTORY_SRC);
   const restExtras = shuffle(
-    [...projs.filter((i) => i.src !== REPERTORY_SRC), ...miscs],
+    [...projs.filter((i) => i.src !== REPERTORY_SRC), ...miscs, ...foods],
     rng,
   );
 
   const numBooks = 3;
   const numFilms = 6;
   const numSelf = 3;
-  /** Project + misc slots so total stays 15 (3+6+3+3). */
+  /** Project + misc + food slots so total stays 15 (3+6+3+3). */
   const numExtra = 3;
 
   const extras: GalleryImage[] = [];
@@ -110,7 +112,7 @@ function pickGalleryImages(rng: () => number): Array<{ image: GalleryImage; tier
     if (!extras.some((e) => e.id === img.id)) extras.push(img);
   }
   if (extras.length < numExtra) {
-    const fallback = shuffle([...projs, ...miscs], rng);
+    const fallback = shuffle([...projs, ...miscs, ...foods], rng);
     for (const img of fallback) {
       if (extras.length >= numExtra) break;
       if (!extras.some((e) => e.id === img.id)) extras.push(img);
@@ -123,7 +125,7 @@ function pickGalleryImages(rng: () => number): Array<{ image: GalleryImage; tier
     selfs.length < numSelf ||
     extras.length < numExtra
   ) {
-    throw new Error('Gallery: image pool too small for book/film/self/project+misc quotas');
+    throw new Error('Gallery: image pool too small for book/film/self/project+misc+food quotas');
   }
 
   const selected: GalleryImage[] = [
@@ -308,6 +310,9 @@ function sizeBodyForTier(
   }
   else if (image.type === 'project') {
     baseW *= 2;
+  }
+  else if (image.type === 'food') {
+    baseW *= .75;
   }
   else if (image.type === 'misc'){
     baseW *= 2.5;

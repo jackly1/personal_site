@@ -10,7 +10,7 @@ function pick<T>(arr: T[]): T | undefined {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
-const FOOD_IMG = '/static/misc/food.png';
+const FOOD_IMG = '/static/food/food.png';
 const MUSIC_IMG = '/static/misc/IMG_1070.jpg';
 
 /**

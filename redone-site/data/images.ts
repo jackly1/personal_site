@@ -1,4 +1,4 @@
-export type ImageType = 'project' | 'book' | 'film' | 'self' | 'misc';
+export type ImageType = 'project' | 'book' | 'film' | 'food' | 'self' | 'misc';
 
 export interface GalleryImage {
   id: number;
@@ -19,7 +19,7 @@ export interface GalleryImage {
 }
 
 /**
- * Built from `public/static/{self,books,film,misc,projects}` via `npm run sync:images`.
+ * Built from `public/static/{self,books,film,food,misc,projects}` via `npm run sync:images`.
  * Edit captions in `data/image-meta.json`. Title, notes, and rank live in
  * `data/gallery-notes.json` (sync reads this file and does not overwrite it).
  * New images: run `npm run sync:init-notes` once to add empty keys, then fill them in.
@@ -32,3 +32,4 @@ export const galleryImagePool = imagePool.filter((i) => !i.omitFromGallery);
 
 export const bookImages = imagePool.filter((i) => i.type === 'book');
 export const filmImages = imagePool.filter((i) => i.type === 'film');
+export const foodImages = imagePool.filter((i) => i.type === 'food');

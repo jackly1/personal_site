@@ -9,6 +9,27 @@ function navLinkClass(active: boolean) {
     : 'font-bold text-neutral-500 transition-colors hover:text-neutral-900';
 }
 
+function MichiganWebringLink({ className }: { className?: string }) {
+  return (
+    <a
+      href="https://michigan-webring.vercel.app"
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`inline-flex shrink-0 items-center opacity-90 transition-opacity hover:opacity-100 ${className ?? ''}`}
+      title="Michigan Webring"
+      aria-label="Michigan Webring"
+    >
+      <img
+        src="https://michigan-webring.vercel.app/images/michigan-logo-black.svg"
+        alt=""
+        width={36}
+        height={50}
+        className="block h-7 w-auto md:h-8"
+      />
+    </a>
+  );
+}
+
 export default function SiteHeader() {
   const pathname = usePathname();
   const isHome = pathname === '/';
@@ -83,7 +104,8 @@ export default function SiteHeader() {
 
           {/* Desktop: three-column + icons — xl (1280px) and up */}
           <div className="hidden min-h-0 w-full flex-1 flex-nowrap items-center xl:flex">
-              <div className="flex min-w-0 flex-1 justify-end pr-2 sm:pr-3 md:pr-4">
+              <div className="flex min-w-0 flex-1 items-center justify-between gap-3 pr-2 sm:pr-3 md:pr-4">
+                  <MichiganWebringLink className="shrink-0" />
                   <nav
                       className="flex flex-row flex-nowrap items-center justify-end gap-3 md:gap-5 text-xs md:text-sm"
                       aria-label="Primary left"

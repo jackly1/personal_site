@@ -155,9 +155,9 @@
     "title": "Happy Together / Wong Kar-Wai"
   },
   "/static/film/happy_together_2.jpg": {
-      "notes": "Love is love and sometimes the person you love is the most annoying person in your life. I think this is Wong Kar-Wai's best.",
-      "rank": null,
-      "title": "Happy Together / Wong Kar-Wai"
+    "notes": "Love is love and sometimes the person you love is the most annoying person in your life. I think this is Wong Kar-Wai's best.",
+    "rank": null,
+    "title": "Happy Together / Wong Kar-Wai"
   },
   "/static/film/harakiri.jpg": {
     "notes": "My grandfather and I had a particularly strong bond shared over Japanese films, we both loved this one.",
@@ -279,7 +279,7 @@
     "rank": null,
     "title": ""
   },
-  "/static/misc/food.png": {
+  "/static/misc/dog_walk.jpg": {
     "notes": "",
     "rank": null,
     "title": ""
@@ -303,5 +303,165 @@
     "notes": "",
     "rank": null,
     "title": ""
+  },
+  "/static/self/moped.JPG": {
+    "title": "",
+    "notes": "",
+    "rank": null
+  },
+  "/static/food/barbecue_chicken_peppers.JPG": {
+    "title": "",
+    "notes": "",
+    "rank": null
+  },
+  "/static/food/barbecue_chicken.JPG": {
+    "title": "",
+    "notes": "",
+    "rank": null
+  },
+  "/static/food/beautiful_veggies.JPG": {
+    "title": "",
+    "notes": "",
+    "rank": null
+  },
+  "/static/food/birria_guac.JPG": {
+    "title": "",
+    "notes": "",
+    "rank": null
+  },
+  "/static/food/birria.JPG": {
+    "title": "",
+    "notes": "",
+    "rank": null
+  },
+  "/static/food/chicken_avocado_tortilla.JPG": {
+    "title": "",
+    "notes": "",
+    "rank": null
+  },
+  "/static/food/chicken_lots_of_greens.JPG": {
+    "title": "",
+    "notes": "",
+    "rank": null
+  },
+  "/static/food/cucumber_shishito.JPG": {
+    "title": "",
+    "notes": "",
+    "rank": null
+  },
+  "/static/food/dirty_rice_chicken.JPG": {
+    "title": "",
+    "notes": "",
+    "rank": null
+  },
+  "/static/food/durkey_chilliii.JPG": {
+    "title": "",
+    "notes": "",
+    "rank": null
+  },
+  "/static/food/eggplant_salad_fries.JPG": {
+    "title": "",
+    "notes": "",
+    "rank": null
+  },
+  "/static/food/food.png": {
+    "title": "",
+    "notes": "",
+    "rank": null
+  },
+  "/static/food/jollof_w_chicken.JPG": {
+    "title": "",
+    "notes": "",
+    "rank": null
+  },
+  "/static/food/jollof.JPG": {
+    "title": "",
+    "notes": "",
+    "rank": null
+  },
+  "/static/food/looks_good_not_my_best.JPG": {
+    "title": "",
+    "notes": "",
+    "rank": null
+  },
+  "/static/food/madrid_salad.JPG": {
+    "title": "",
+    "notes": "",
+    "rank": null
+  },
+  "/static/food/mexican.JPG": {
+    "title": "",
+    "notes": "",
+    "rank": null
+  },
+  "/static/food/mutlicolor_taco.JPG": {
+    "title": "",
+    "notes": "",
+    "rank": null
+  },
+  "/static/food/oxtail.JPG": {
+    "title": "",
+    "notes": "",
+    "rank": null
+  },
+  "/static/food/pork_steak_madrid.JPG": {
+    "title": "",
+    "notes": "",
+    "rank": null
+  },
+  "/static/food/pozole.JPG": {
+    "title": "",
+    "notes": "",
+    "rank": null
+  },
+  "/static/food/puerto_rican_chicken.JPG": {
+    "title": "",
+    "notes": "",
+    "rank": null
+  },
+  "/static/food/roasted_tomato_onion_chicken.JPG": {
+    "title": "",
+    "notes": "",
+    "rank": null
+  },
+  "/static/food/shabu_shabu.JPG": {
+    "title": "",
+    "notes": "",
+    "rank": null
+  },
+  "/static/food/spaghetti_corn_sauce.JPG": {
+    "title": "",
+    "notes": "",
+    "rank": null
+  },
+  "/static/food/steak_brussels_red_onion.JPG": {
+    "title": "",
+    "notes": "",
+    "rank": null
+  },
+  "/static/food/stockholm_salmon.JPG": {
+    "title": "",
+    "notes": "",
+    "rank": null
+  },
+  "/static/food/tomato_confit_beets_chicken.JPG": {
+    "title": "",
+    "notes": "",
+    "rank": null
+  },
+  "/static/food/tomato_rice.JPG": {
+    "title": "",
+    "notes": "",
+    "rank": null
+  },
+  "/static/food/tomato_soup.JPG": {
+    "title": "",
+    "notes": "",
+    "rank": null
+  },
+  "/static/food/vibrant_taco.JPG": {
+    "title": "",
+    "notes": "",
+    "rank": null
   }
 }

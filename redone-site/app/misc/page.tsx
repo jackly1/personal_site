@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { MiscZoomLightbox } from '@/components/MiscZoomLightbox';
 
-const FOOD = '/static/misc/food.png';
+const FOOD = '/static/misc/dog_walk.jpg';
 const BIKE = '/static/misc/bike.JPG';
 
 type Expanded = 'food' | 'bike' | null;
@@ -76,7 +76,7 @@ export default function MiscPage() {
                   type="button"
                   onClick={() => setExpanded('food')}
                   className="group w-full cursor-zoom-in border-0 bg-transparent p-0 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2"
-                  aria-label="Open food image larger"
+                  aria-label="Open photo larger"
                 >
                   <img
                     src={FOOD}
@@ -85,12 +85,7 @@ export default function MiscPage() {
                   />
                 </button>
                 <p className="mt-3 text-center text-sm leading-relaxed text-neutral-600 md:mt-4">
-                  For two summers I worked at Ernesto&apos;s, a Basque restaurant
-                  where I first ran a concession stand outdoors that sold summer
-                  treats, and later worked as a runner/server. The job was easy to
-                  fall in love with, the people, the role, the environment, but
-                  most of all was the food. Since working there, I have developed a
-                  love for cooking.
+                  For six years I worked as dog walker in NYC. I started at 13, 
                 </p>
               </section>
 
