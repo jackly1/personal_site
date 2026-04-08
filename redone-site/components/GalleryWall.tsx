@@ -240,37 +240,38 @@ function findSlot(
 }
 
 /** naturalWidth / naturalHeight — used so layout matches photo proportions (no crop). */
-let aspectRatioCache: Map<number, number> | null = null;
+const aspectRatioById = new Map<number, number>();
 
-async function loadImageAspectRatios(
-  pool: GalleryImage[],
-): Promise<Map<number, number>> {
-  if (aspectRatioCache) return aspectRatioCache;
-
-  const map = new Map<number, number>();
+/** Loads dimensions only for the given images (home wall uses 15, not the full pool). */
+async function loadImageAspectRatiosForImages(
+  images: GalleryImage[],
+): Promise<void> {
+  const unique = Array.from(new Map(images.map((i) => [i.id, i])).values());
+  const missing = unique.filter((i) => !aspectRatioById.has(i.id));
+  if (missing.length === 0) return;
 
   await Promise.all(
-    pool.map(
+    missing.map(
       (entry) =>
         new Promise<void>((resolve) => {
           const im = new Image();
           im.onload = () => {
             const w = im.naturalWidth;
             const h = im.naturalHeight;
-            map.set(entry.id, w > 0 && h > 0 ? w / h : 1);
+            aspectRatioById.set(
+              entry.id,
+              w > 0 && h > 0 ? w / h : 1,
+            );
             resolve();
           };
           im.onerror = () => {
-            map.set(entry.id, 1);
+            aspectRatioById.set(entry.id, 1);
             resolve();
           };
           im.src = entry.src;
         }),
     ),
   );
-
-  aspectRatioCache = map;
-  return map;
 }
 
 /** Film stills in the **small** tier are 1.5× the normal small width. Books use BOOK_SCALE. Large = self only; large scale factor uses rng in [0, 0.2] → 0.75–0.95×. */
@@ -341,8 +342,9 @@ function buildBodies(
   vh: number,
   rng: () => number,
   aspects: Map<number, number>,
+  bodiesMeta?: Array<{ image: GalleryImage; tier: Tier }>,
 ): Body[] {
-  const bodiesMeta = pickGalleryImages(rng);
+  const meta = bodiesMeta ?? pickGalleryImages(rng);
 
   let scale = 2;
   for (let attempt = 0; attempt < 35; attempt++) {
@@ -350,7 +352,7 @@ function buildBodies(
     const out: Body[] = [];
     let ok = true;
 
-    for (const { image, tier } of bodiesMeta) {
+    for (const { image, tier } of meta) {
       const aspectWh = aspects.get(image.id) ?? 1;
       const { w, h } = sizeBodyForTier(image, tier, rng, aspectWh, vw, vh, scale);
       const pos = findSlot(w, h, vw, vh, placed, rng);
@@ -619,9 +621,13 @@ export default function GalleryWall() {
   const lastSizeRef = useRef({ w: 0, h: 0 });
 
   const initBodies = useCallback(async (vw: number, vh: number) => {
-    const aspects = await loadImageAspectRatios(galleryImagePool);
     const rng = mulberry32(seedRef.current);
-    const built = buildBodies(vw, vh, rng, aspects);
+    const bodiesMeta = pickGalleryImages(rng);
+    const uniqueImages = Array.from(
+      new Map(bodiesMeta.map((b) => [b.image.id, b.image])).values(),
+    );
+    await loadImageAspectRatiosForImages(uniqueImages);
+    const built = buildBodies(vw, vh, rng, aspectRatioById, bodiesMeta);
     bodiesRef.current = built;
     linkRefs.current = [];
     setBodies(built);
@@ -789,9 +795,15 @@ export default function GalleryWall() {
     return (
       <div
         ref={viewportRef}
-        className="relative w-full overflow-hidden bg-[#fafafa]"
+        className="relative flex w-full items-center justify-center overflow-hidden bg-[#fafafa]"
         style={{ height: 'calc(100vh - 96px)' }}
-      />
+      >
+        <p
+          className="-translate-y-10 text-2xl tracking-wide text-neutral-400 sm:text-3xl"
+          aria-live="polite"
+        >
+        </p>
+      </div>
     );
   }
 
