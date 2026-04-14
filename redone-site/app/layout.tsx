@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import SiteHeader from '@/components/SiteHeader';
+import PostHogProvider from '@/components/PostHogProvider';
+import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -20,10 +22,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="flex min-h-screen flex-col font-sans">
-        <SiteHeader />
-        <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-x-hidden">
-          {children}
-        </div>
+        <PostHogProvider>
+          <SiteHeader />
+          <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-x-hidden">
+            {children}
+          </div>
+          <Analytics />
+        </PostHogProvider>
       </body>
     </html>
   );
