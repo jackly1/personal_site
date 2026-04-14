@@ -75,6 +75,7 @@ export function GalleryWithSort({
   footer,
   /** When true, title + notes appear in a side popover (books + films). */
   detailHover = false,
+  showRankedSort = true,
 }: {
   title: string;
   items: GalleryImage[];
@@ -82,6 +83,7 @@ export function GalleryWithSort({
   headerLink?: { href: string; label: string };
   footer?: ReactNode;
   detailHover?: boolean;
+  showRankedSort?: boolean;
 }) {
   const [sortMode, setSortMode] = useState<GallerySortMode>('random');
   const [randomVersion, setRandomVersion] = useState(0);
@@ -99,6 +101,23 @@ export function GalleryWithSort({
       setRandomVersion((v) => v + 1);
     }
   }, []);
+
+  const sortOptions = useMemo(
+    () =>
+      (
+        showRankedSort
+          ? [
+              ['random', 'Random'],
+              ['alpha', 'A–Z'],
+              ['ranked', 'Ranked'],
+            ]
+          : [
+              ['random', 'Random'],
+              ['alpha', 'A–Z'],
+            ]
+      ) as ReadonlyArray<readonly [GallerySortMode, string]>,
+    [showRankedSort]
+  );
 
   const masonryItems = useMemo(
     () =>
@@ -124,13 +143,7 @@ export function GalleryWithSort({
               role="group"
               aria-label="Sort order"
             >
-              {(
-                [
-                  ['random', 'Random'],
-                  ['alpha', 'A–Z'],
-                  ['ranked', 'Ranked'],
-                ] as const
-              ).map(([mode, label]) => (
+              {sortOptions.map(([mode, label]) => (
                 <button
                   key={mode}
                   type="button"
