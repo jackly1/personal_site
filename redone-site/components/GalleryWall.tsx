@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { galleryImagePool, type GalleryImage } from '@/data/images';
+import { scheduleRestOfPoolAfterHome } from '@/lib/prefetchSiteImages';
 
 function mulberry32(seed: number) {
   return function () {
@@ -627,6 +628,9 @@ export default function GalleryWall() {
       new Map(bodiesMeta.map((b) => [b.image.id, b.image])).values(),
     );
     await loadImageAspectRatiosForImages(uniqueImages);
+    scheduleRestOfPoolAfterHome(
+      new Set(bodiesMeta.map((m) => m.image.src)),
+    );
     const built = buildBodies(vw, vh, rng, aspectRatioById, bodiesMeta);
     bodiesRef.current = built;
     linkRefs.current = [];

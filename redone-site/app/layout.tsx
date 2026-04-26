@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import BackgroundImageWarmup from '@/components/BackgroundImageWarmup';
 import SiteHeader from '@/components/SiteHeader';
 import PostHogProvider from '@/components/PostHogProvider';
 import { Analytics } from '@vercel/analytics/next';
@@ -23,6 +24,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="flex min-h-screen flex-col font-sans">
         <PostHogProvider>
+          <BackgroundImageWarmup />
           <SiteHeader />
           <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-x-hidden">
             {children}
