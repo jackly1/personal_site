@@ -12,15 +12,15 @@ export default function BioPage() {
 
                         <div className="space-y-6 leading-relaxed text-neutral-600">
                             <p>
-                                I am a CS and Spanish double major at the
-                                Univeristy of Michigan, minoring in Global Media
-                                Studies. I love{" "}
+                                I am a recent grad from the Univeristy of
+                                Michigan, B.S. in Computer Science and Spanish, minor in Global
+                                Media Studies (Film). I love{" "}
                                 <b>
                                     <a href="/films">film</a>
                                 </b>
                                 {""}, a good{" "}
                                 <b>
-                                    <a href="/readings">book</a>
+                                    <a href="/books">book</a>
                                 </b>
                                 {""}, riding my{" "}
                                 <b>
@@ -30,7 +30,8 @@ export default function BioPage() {
                                 <b>
                                     <a href="/writing">writing</a>
                                 </b>
-                                {""} occasionally, and tech that genuinely helps people.
+                                {""} occasionally, and tech that genuinely helps
+                                people.
                             </p>
 
                             <p>
@@ -69,6 +70,23 @@ export default function BioPage() {
                                 className="block font-bold text-neutral-800 transition-colors hover:text-neutral-900"
                             >
                                 LinkedIn
+                            </a>
+
+                            <a
+                                href="https://michigan-webring.vercel.app"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="mt-8 inline-flex transition-opacity hover:opacity-70"
+                                title="Michigan Webring"
+                                aria-label="Michigan Webring"
+                            >
+                                <img
+                                    src="https://michigan-webring.vercel.app/images/michigan-logo-black.svg"
+                                    alt="Michigan Webring"
+                                    width={36}
+                                    height={50}
+                                    className="h-[50px] w-[36px] object-contain"
+                                />
                             </a>
                         </div>
                     </div>
