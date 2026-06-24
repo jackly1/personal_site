@@ -12,9 +12,19 @@ export default function BioPage() {
 
                         <div className="space-y-6 leading-relaxed text-neutral-600">
                             <p>
-                                I am a recent grad from the Univeristy of
-                                Michigan, B.S. in Computer Science and Spanish, minor in Global
-                                Media Studies (Film). I love{" "}
+                                My name is Jack, I am an AI Product Manager at
+                                <b>
+                                    {" "}
+                                    <a href="https://www.linkedin.com/company/prospertechnologies/">
+                                        Prosper AI
+                                    </a>
+                                </b>
+                                .
+                            </p>
+                            <p>
+                                I graduated from the Univeristy of Michigan with
+                                a B.S. in Computer Science and Spanish, and a
+                                minor in Global Media Studies (Film). I love{" "}
                                 <b>
                                     <a href="/films">film</a>
                                 </b>
@@ -33,26 +43,31 @@ export default function BioPage() {
                                 {""} occasionally, and tech that genuinely helps
                                 people.
                             </p>
-
                             <p>
-                                I grew up in New York surrounded by art. As a
-                                kid, I was always being dragged from one art
-                                gallery to the next. By adolescence, film became
-                                my medium of choice, I found a love for it that
-                                I had never known before.
+                                Throughout my life, I have centered my studies
+                                around language. Aside from a lifelong study of
+                                Spanish, in high school I discovered computer
+                                science and film. And, while vastly different
+                                realms, I found a love in each in a way that I
+                                never had before. I am driven by a deep
+                                curiosity about how languages shape our
+                                understanding of the world and our interactions
+                                with it.
+
                             </p>
-
-                            <p>
-                                During high school I discovered computer
-                                science. As I moved through college, however, I
-                                found myself more and more conflicted in a field
-                                that sometimes felt like it was too far removed
-                                from the world I knew. Each{" "}
+                            <p>At first each{" "}
                                 <b>
                                     <a href="/projects">project</a>
                                 </b>{" "}
-                                is an attempt for me to bring a little bit of my
-                                education to my known world.
+                                was an explorative effort in translating my
+                                education to this appreciation. And, most
+                                recently,{" "}
+                                <b>
+                                    <a href="repertory.nyc">Repertory NYC</a>
+                                </b>{" "}
+                                has been my attempt in translating the hidden,
+                                fragmented language of NYC's film scene into a
+                                resource that those foreign to it can use.
                             </p>
                         </div>
 
