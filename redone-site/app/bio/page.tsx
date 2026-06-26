@@ -47,7 +47,7 @@ export default function BioPage() {
                                 Throughout my life, I have centered my studies
                                 around language. Aside from a lifelong study of
                                 Spanish, in high school I discovered computer
-                                science and film. And, while vastly different
+                                science and film. While vastly different
                                 realms, I found a love in each in a way that I
                                 never had before. I am driven by a deep
                                 curiosity about how languages shape our
